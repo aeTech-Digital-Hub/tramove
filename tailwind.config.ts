@@ -62,7 +62,9 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				red: '#DD1234',
+				'deep-red': '#B30F2A'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
