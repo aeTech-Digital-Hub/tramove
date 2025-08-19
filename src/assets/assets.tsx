@@ -12,6 +12,15 @@ import materialSymbol from './material-symbols_verified-user-outline-rounded.png
 import deliveryTrack3 from './pngegg (12).png'
 import deliveryTrack2 from './pngwing.com (25) 1.png'
 import trackIcon from './hugeicons_truck.png'
+import aboutheroimage from './aboutImage.png'
+import reliability from './realiability.png'
+import excellence from './excellence.png'
+import transparency from './tarnsparency.png'
+import innovation from './innovation.png'
+import person1 from './person1.png'
+import person2 from './person2.png'
+import person3 from './person3.png'
+
 
 
 
@@ -30,7 +39,15 @@ const assets = {
    materialSymbol,
    deliveryTrack3,
    deliveryTrack2,
-   trackIcon
+   trackIcon,
+   aboutheroimage,
+   reliability,
+   excellence,
+   transparency,
+   innovation,
+   person1,
+   person2,
+   person3
 
 }
 

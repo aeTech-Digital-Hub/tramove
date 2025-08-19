@@ -71,48 +71,48 @@ const Index = () => {
         We are dedicated to providing the most reliable and transparent
         automotive Logistic services in ghana
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 p-10 m-8">
-        <div className="grid">
-          <div className="bg-red rounded-full justify-center p-2 m-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-6 p-10 m-8">
+        <div className="grid shadow bg-slate-50 p-4">
+          <div className="bg-red rounded-full p-2 w-10">
             <img
               src={assets.trackIcon}
               alt=""
               className="w-[33px] items-start"
             />
           </div>
-          <h3 className="font-bold text-1xl pb-3 text-center">Vetted Transporters</h3>
-          <p className="text-center">
+          <h3 className="font-bold text-1xl pb-3">Vetted Transporters</h3>
+          <p className="">
             We thoroughly vet all transporters on our platform so you don't have
             to worry about quality or reliability
           </p>
         </div>
-        <div className="grid items-center">
-          <div className="bg-red rounded-full justify-center p-2 m-auto items-center">
+        <div className="grid shadow bg-slate-50 p-4">
+          <div className="bg-red rounded-full p-2 w-10 ">
             <img src={assets.moneyicon} alt="" className="w-[33px]" />
           </div>
-          <h3 className="font-bold text-1xl pb-3 text-center">Transparent Pricing</h3>
-          <p className="text-center">
+          <h3 className="font-bold text-1xl pb-3">Transparent Pricing</h3>
+          <p className="">
             Get upfront quotes with no hidden fees. Our transparent pricing
             ensures you know exactly what you're paying for.
           </p>
         </div>
 
-        <div className="grid items-center">
-          <div className="bg-red rounded-full justify-center p-2 m-auto items-center">
+        <div className="grid shadow bg-slate-50 p-4">
+          <div className="bg-red rounded-full justify-center p-2 w-10 items-center">
             <img src={assets.location} alt="" className="w-[33px]" />
           </div>
-          <h3 className="font-bold text-1xl pb-3 text-center">Real-Time Tracking</h3>
-          <p className="text-center">
+          <h3 className="font-bold text-1xl pb-3">Real-Time Tracking</h3>
+          <p className="">
             Follow your shipment journey with our advanced tracking system,
             keeping you informed every step of the way
           </p>
         </div>
-        <div className="grid items-center">
-          <div className="bg-red rounded-full justify-center p-2 m-auto items-center">
+        <div className="grid shadow-sm bg-slate-50 p-4">
+          <div className="bg-red rounded-full justify-center p-2 w-10 items-center">
             <img src={assets.location} alt="" className="w-[33px]" />
           </div>
-          <h3 className="font-bold text-1xl pb-3 text-center">Admin Oversight</h3>
-          <p className="text-center">
+          <h3 className="font-bold text-1xl pb-3">Admin Oversight</h3>
+          <p className="">
             Our dedicated admin team monitors every shipment, ensuring quality
             service and quickly resolving any issues that arise
           </p>
@@ -145,15 +145,15 @@ const Index = () => {
 
       <div className="container flex items-center justify-center p-10 border-b border-gray-200 mt-10">
         <div className='flex flex-col'>
-          <h2 className="font-semibold text-5xl m-6">
+          <h2 className="font-semibold text-4xl m-6">
             Ready To <span className="text-red">Streamline ?</span> Your <span className="text-red">Logistics</span>, Get Started Today!
           </h2>
           <div className="items-start p-5 w-60 text-center">
             <Button>Get Started</Button>
           </div>
         </div>
-        <div>
-          <img src={assets.deliveryTrack3} alt="" className="w-90"/>
+        <div className="w-4/5">
+          <img src={assets.deliveryTrack3} alt="" className="w-100%"/>
         </div>
       </div>
     </div>
