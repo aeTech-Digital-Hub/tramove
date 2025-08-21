@@ -20,6 +20,9 @@ import innovation from './innovation.png'
 import person1 from './person1.png'
 import person2 from './person2.png'
 import person3 from './person3.png'
+import serviceHero from './serviceHero.png'
+import card from './cards.png'
+import realtime from './realtime.png'
 
 
 
@@ -47,7 +50,10 @@ const assets = {
    innovation,
    person1,
    person2,
-   person3
+   person3,
+   serviceHero,
+   card,
+   realtime
 
 }
 
