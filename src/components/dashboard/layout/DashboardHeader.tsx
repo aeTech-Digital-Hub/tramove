@@ -10,7 +10,7 @@ interface DashboardHeaderProps {
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   userName,
   userImage,
-  notificationCount = 0,
+  notificationCount = 10,
 }) => {
   return (
     <header className="bg-white shadow-sm py-3 px-6 flex items-center justify-between sticky top-0 z-10">

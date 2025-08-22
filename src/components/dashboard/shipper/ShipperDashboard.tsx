@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StatsCard from './StatsCard';
 import SpecialOffer from './SpecialOffer';
 import ActiveShipments from './ActiveShipments';
 import StatusDistribution from './StatusDistribution';
 import PendingBids from './PendingBids';
+import useAuthStore from '@/store/useAuthStore';
+import useShipmentStore from '@/store/useShipmentStore';
+import useBidStore from '@/store/useBidStore';
 
 interface ShipperDashboardProps {
   user: {
@@ -13,6 +16,18 @@ interface ShipperDashboardProps {
 }
 
 const ShipperDashboard: React.FC<ShipperDashboardProps> = ({ user }) => {
+  const { shipments, setShipments, loading: shipmentsLoading } = useShipmentStore();
+  const { bids, setBids, loading: bidsLoading } = useBidStore();
+
+  // In a real app, you would fetch data from your API here
+  useEffect(() => {
+    // Simulated API calls
+    const fetchData = async () => {
+      // Fetch shipments and bids data
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="container mx-auto p-4">
       <div className="mb-6">

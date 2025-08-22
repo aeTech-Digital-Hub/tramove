@@ -26,7 +26,7 @@ const StatsCard: React.FC<StatsCardProps> = ({ icon, value, label, bgColor, text
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+    <div className="bg-white rounded-lg shadow p-4 py-6 flex flex-col items-center">
       <div className={`${bgColor} ${textColor} p-3 rounded-full mb-3`}>
         {renderIcon()}
       </div>

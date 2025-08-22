@@ -1,9 +1,8 @@
 import React from 'react'
-import Button from '@/components/Button'
 
 const About = () => {
   return (
-    <div></div>
+    <div>About Page</div>
   )
 }
 

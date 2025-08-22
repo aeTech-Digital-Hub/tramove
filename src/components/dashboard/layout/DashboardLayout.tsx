@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
+import useUIStore from '@/store/useUIStore';
+import useAuthStore from '@/store/useAuthStore';
 
 interface DashboardLayoutProps {
   children: ReactNode;
-  userType: 'shipper' | 'transporter';
+  userType: 'shipper' | 'transporter' | 'admin';
   userName?: string;
   userImage?: string;
 }
@@ -15,9 +17,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   userName = 'Adam Logistics',
   userImage
 }) => {
+  const { isSidebarOpen, toggleSidebar } = useUIStore();
+
   return (
     <div className="flex min-h-screen bg-gray-100">
-      <Sidebar userType={userType} />
+      <Sidebar userType={userType} isOpen={isSidebarOpen} />
       <div className="ml-60 flex-1 flex flex-col">
         <DashboardHeader 
           userName={userName} 
