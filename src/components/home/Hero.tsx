@@ -26,8 +26,8 @@ const Hero = () => {
               </p>
             </div>
             <div className='flex gap-2'>
-              <Button>Get Started</Button>
-              <Button >Learn More</Button>
+              <div><Button>Get Started</Button></div>
+              <div className='bg-transparent'><Button >Learn More</Button></div>
             </div>
           </div>
         </div>

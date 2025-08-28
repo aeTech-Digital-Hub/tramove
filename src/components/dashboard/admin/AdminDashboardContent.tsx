@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { FiUsers, FiTruck, FiPackage, FiDollarSign } from 'react-icons/fi';
 import StatsCard from '../shipper/StatsCard';
-import ActionCard from './ActionCard';
 import AssignTransporterModal from './AssignTransporterModal';
 import SuccessModal from './SuccessModal';
+import AdjustQuoteModal from './AdjustQuoteModal';
+import PendingShipmentsTable, { type PendingShipment } from '../shared/PendingShipmentsTable';
 
 // Mock data structure
-interface PendingShipment {
+interface TransporterApplication {
   id: string;
   shipper: string;
   cargoType: string;
@@ -64,7 +64,9 @@ const AdminDashboardContent: React.FC = () => {
   const [transporterApplications, setTransporterApplications] = useState<TransporterApplication[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
+  const [isAdjustQuoteModalOpen, setIsAdjustQuoteModalOpen] = useState(false);
   const [selectedShipmentId, setSelectedShipmentId] = useState<string>('');
+  const [selectedShipment, setSelectedShipment] = useState<PendingShipment | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -102,8 +104,14 @@ const AdminDashboardContent: React.FC = () => {
   }, []);
 
   const handleAdjustQuote = async (shipmentId: string) => {
-    console.log('Adjusting quote for shipment:', shipmentId);
-    // Add quote adjustment logic here
+    // Find the shipment in the pending shipments array
+    const shipment = pendingShipments.find(s => s.id === shipmentId);
+    
+    if (shipment) {
+      setSelectedShipment(shipment);
+      setSelectedShipmentId(shipmentId);
+      setIsAdjustQuoteModalOpen(true);
+    }
   };
 
   const handleAssignTransporter = async (shipmentId: string) => {
@@ -176,72 +184,14 @@ const AdminDashboardContent: React.FC = () => {
         />
       </div>
       
-      <div className='bg-white rounded-lg shadow p-4'>
-        <div className='flex flex-col gap-2 mb-4'>
-          <h1 className='font-semibold text-xl'>Pending Shipments</h1>
-          <p className="text-gray-500 text-sm">Shipments waiting for transporter assignment</p>
-        </div>
-        
-        <div className="overflow-x-auto">
-          <table className="w-full border rounded-2xl">
-            <thead>
-              <tr className="text-sm text-gray-600 border-b">
-                <div className='w-full flex text-gray-500 items-center justify-between px-3'>
-                  <th className="text-left text-sm py-3">Shipment ID</th>
-                  <th className="text-left text-sm py-3">Shipper</th>
-                  <th className="text-left text-sm py-3">Cargo type</th>
-                  <th className="text-left text-sm py-3">Route</th>
-                  <th className="text-left text-sm py-3">ETA</th>
-                  <th className="text-left text-sm py-3">Quote</th>
-                </div>
-                <th className="text-left py-3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading ? (
-                <tr>
-                  <td colSpan={7} className="py-8 text-center text-gray-500">
-                    Loading pending shipments...
-                  </td>
-                </tr>
-              ) : pendingShipments.length === 0 ? (
-                <tr>
-                  <td colSpan={7} className="py-8 text-center text-gray-500">
-                    No pending shipments found
-                  </td>
-                </tr>
-              ) : (
-                pendingShipments.map((shipment, index) => (
-                  <tr key={`${shipment.id}-${index}`} className={`text-sm border rounded-lg ${index !== pendingShipments.length - 1 ? 'border-b' : ''}`}>
-                    <div className='w-full flex items-center justify-between px-6 font-semibold'>
-                      <td className="py-4">{shipment.id}</td>
-                      <td className="py-4">{shipment.shipper}</td>
-                      <td className="py-4">{shipment.cargoType}</td>
-                      <td className="py-4">{shipment.route}</td>
-                      <td className="py-4">{shipment.eta}</td>
-                      <td className="py-4">₵ {shipment.quote.toLocaleString()}</td>
-                    </div>
-                    <td className="py-4 flex gap-2 w-full justify-end items-end">
-                      <button 
-                        onClick={() => handleAdjustQuote(shipment.id)}
-                        className="px-4 py-2 bg-gray-100 text-gray-600 border border-gray-600 rounded-full hover:bg-gray-50"
-                      >
-                        Adjust Quote
-                      </button>
-                      <button 
-                        onClick={() => handleAssignTransporter(shipment.id)}
-                        className="px-4 py-2 text-white bg-gradient-to-t from-red to-deep-red rounded-full hover:bg-[#E60023]/90"
-                      >
-                        Assign Transporter
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <PendingShipmentsTable
+        shipments={pendingShipments}
+        isLoading={isLoading}
+        onAdjustQuote={handleAdjustQuote}
+        onAssignTransporter={handleAssignTransporter}
+        title="Pending Shipments"
+        description="Shipments waiting for transporter assignment"
+      />
 
       <div className='bg-white rounded-lg shadow p-4'>
         <div className='flex flex-col gap-2 mb-4'>
@@ -327,6 +277,29 @@ const AdminDashboardContent: React.FC = () => {
         onClose={handleSuccessModalClose}
         message={successMessage}
       />
+
+      {selectedShipment && (
+        <AdjustQuoteModal
+          isOpen={isAdjustQuoteModalOpen}
+          onClose={() => {
+            setIsAdjustQuoteModalOpen(false);
+            setSelectedShipment(null);
+          }}
+          shipment={selectedShipment}
+          onSaveQuote={(newQuote) => {
+            // Update the shipment in the list with the new quote
+            setPendingShipments(prevShipments => 
+              prevShipments.map(shipment => 
+                shipment.id === selectedShipment.id 
+                  ? {...shipment, quote: newQuote} 
+                  : shipment
+              )
+            );
+            setIsAdjustQuoteModalOpen(false);
+            setSelectedShipment(null);
+          }}
+        />
+      )}
     </div>
   );
 };

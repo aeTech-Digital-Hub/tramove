@@ -1,92 +1,108 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import React, { useState } from "react";
+import { FiChevronDown } from "react-icons/fi";
 
 interface Notification {
   id: string;
-  type: 'info' | 'success' | 'warning' | 'error';
-  title: string;
+  isNew?: boolean;
   message: string;
+  application?: boolean;
   date: string;
   read: boolean;
 }
 
-const notifications: Notification[] = [
-  {
-    id: "N1",
-    type: "success",
-    title: "New Registration",
-    message: "New transporter registered: Quick Delivery Services",
-    date: "2025-08-15 09:15",
-    read: false
-  },
-  {
-    id: "N2",
-    type: "warning",
-    title: "Delayed Shipment",
-    message: "Shipment #SH001 is running behind schedule",
-    date: "2025-08-14 16:20",
-    read: true
-  },
-  {
-    id: "N3",
-    type: "info",
-    title: "System Update",
-    message: "System maintenance scheduled for tonight",
-    date: "2025-08-14 11:30",
-    read: true
-  }
-];
-
-const getNotificationColor = (type: Notification['type']) => {
-  switch (type) {
-    case 'success': return 'bg-green-100 text-green-800';
-    case 'warning': return 'bg-yellow-100 text-yellow-800';
-    case 'error': return 'bg-red-100 text-red-800';
-    default: return 'bg-blue-100 text-blue-800';
-  }
-};
-
 const NotificationsPage = () => {
+  const [notifications] = useState<Notification[]>([
+    {
+      id: "1",
+      isNew: true,
+      message: "Emmanuel Addo has applied to become a transporter. Review their application.",
+      date: "Today, 1:15PM (GMT)",
+      read: false,
+      application: true,
+    },
+    {
+      id: "2",
+      isNew: true,
+      message: "New shipment request from Samuel Osei. Check the details and approve or reject.",
+      date: "Today, 10:30AM (GMT)",
+      read: false,
+      application: false,
+    },
+    {
+      id: "3",
+      isNew: false,
+      message: "System maintenance scheduled for tomorrow at 2:00AM GMT. The system will be down for approximately 30 minutes.",
+      date: "Yesterday, 5:45PM (GMT)",
+      read: false,
+      application: false,
+    }
+  ]);
+
   return (
-    <div className="space-y-4">
-      <Card className="p-4">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Status</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Message</TableHead>
-              <TableHead>Date</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+    <div className="p-6 max-w-5xl">
+      <div className="flex flex-col space-y-5">
+        {/* Header */}
+        <div>
+          <h1 className="text-2xl font-semibold text-gray-800">Notifications</h1>
+          <p className="text-gray-500 mt-1">View and manage your system notifications</p>
+        </div>
+
+        {/* Notification container */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          {/* Controls */}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+            <div className="relative">
+              <button className="flex items-center gap-2 text-sm px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
+                <span>All Notifications</span>
+                <FiChevronDown className="text-gray-500" />
+              </button>
+            </div>
+            <div className="flex items-center gap-5">
+              <button className="text-sm text-blue-600 font-medium hover:text-blue-700">
+                Mark all as Read
+              </button>
+              <button className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700">
+                Clear all
+              </button>
+            </div>
+          </div>
+
+          {/* Notifications */}
+          <div>
             {notifications.map((notification) => (
-              <TableRow key={notification.id} className={notification.read ? "" : "font-medium bg-gray-50"}>
-                <TableCell>
-                  <span className={`w-2 h-2 rounded-full inline-block ${notification.read ? 'bg-gray-300' : 'bg-blue-500'}`} />
-                </TableCell>
-                <TableCell>
-                  <span className={`px-2 py-1 rounded-full text-xs ${getNotificationColor(notification.type)}`}>
-                    {notification.type}
-                  </span>
-                </TableCell>
-                <TableCell>{notification.title}</TableCell>
-                <TableCell>{notification.message}</TableCell>
-                <TableCell>{notification.date}</TableCell>
-              </TableRow>
+              <div 
+                key={notification.id} 
+                className="group px-6 py-4 border-b border-gray-200 hover:bg-gray-50 relative transition-colors duration-150"
+              >
+                <div className="flex items-start gap-3">
+                  {notification.isNew && (
+                    <span className="flex-shrink-0 w-2 h-2 rounded-full bg-green-500 mt-1.5" />
+                  )}
+                  <div className="flex-1 pr-16">
+                    <p className="text-gray-800 leading-relaxed">{notification.message}</p>
+                    <div className="flex justify-between items-center mt-2">
+                      <span className="text-sm text-gray-500">{notification.date}</span>
+                      <button className="text-blue-600 text-sm font-medium hover:text-blue-800 opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                        Mark as read
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {notification.isNew && (
+                  <div className="absolute right-6 top-4 bg-green-50 text-green-700 text-xs font-medium px-2 py-1 rounded">
+                    New
+                  </div>
+                )}
+                {notification.application && (
+                  <div className="absolute right-20 top-4 bg-blue-50 text-blue-700 text-xs font-medium px-2 py-1 rounded">
+                    Application
+                  </div>
+                )}
+              </div>
             ))}
-          </TableBody>
-        </Table>
-      </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

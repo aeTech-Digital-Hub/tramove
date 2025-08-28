@@ -34,7 +34,7 @@ const Footer = () => {
                     </li>
                     <li className='text-gray-600 flex items-center gap-2'>
                         <MdEmail className="text-red" />
-                        info@tarmove.com
+                        info@tarmove.net
                     </li>
                 </ul>
             </div>
