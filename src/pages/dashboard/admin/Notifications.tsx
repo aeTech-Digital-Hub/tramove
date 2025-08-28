@@ -10,7 +10,7 @@ interface Notification {
   read: boolean;
 }
 
-const NotificationsPage = () => {
+const NotificationsPage : React.FC = () => {
   const [notifications] = useState<Notification[]>([
     {
       id: "1",

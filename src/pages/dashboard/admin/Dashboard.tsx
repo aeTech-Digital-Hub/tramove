@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/layout/DashboardLayout";
 import AdminDashboardContent from "@/components/dashboard/admin/AdminDashboardContent";
 import TransportersPage from "./Transporters";
@@ -11,16 +11,16 @@ import NotificationsPage from "./Notifications";
 import SettingsPage from "./Settings";
 
 const AdminDashboardPage: React.FC = () => {
-  const location = useLocation();
-  const path = location.pathname;
+  // const location = useLocation();
+  // const path = location.pathname;
   
   // Extract the page title from the path
-  const getPageTitle = () => {
-    const segments = path.split('/');
-    const lastSegment = segments[segments.length - 1];
-    if (lastSegment === 'admin') return 'Dashboard Overview';
-    return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
-  };
+  // const getPageTitle = () => {
+  //   const segments = path.split('/');
+  //   const lastSegment = segments[segments.length - 1];
+  //   if (lastSegment === 'admin') return 'Dashboard Overview';
+  //   return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
+  // };
 
   return (
     <DashboardLayout userType="admin" userName="Admin">

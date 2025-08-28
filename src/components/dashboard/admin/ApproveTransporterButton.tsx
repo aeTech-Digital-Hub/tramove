@@ -8,7 +8,7 @@ interface ApproveTransporterButtonProps {
 }
 
 const ApproveTransporterButton: React.FC<ApproveTransporterButtonProps> = ({
-  transporterId,
+  // transporterId,
   transporterName,
   onApproved
 }) => {

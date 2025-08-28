@@ -4,9 +4,9 @@ import SpecialOffer from './SpecialOffer';
 import ActiveShipments from './ActiveShipments';
 import StatusDistribution from './StatusDistribution';
 import PendingBids from './PendingBids';
-import useAuthStore from '@/store/useAuthStore';
-import useShipmentStore from '@/store/useShipmentStore';
-import useBidStore from '@/store/useBidStore';
+// import useAuthStore from '@/store/useAuthStore';
+// import useShipmentStore from '@/store/useShipmentStore';
+// import useBidStore from '@/store/useBidStore';
 
 interface ShipperDashboardProps {
   user: {
@@ -16,8 +16,8 @@ interface ShipperDashboardProps {
 }
 
 const ShipperDashboard: React.FC<ShipperDashboardProps> = ({ user }) => {
-  const { shipments, setShipments, loading: shipmentsLoading } = useShipmentStore();
-  const { bids, setBids, loading: bidsLoading } = useBidStore();
+  // const { shipments, setShipments, loading: shipmentsLoading } = useShipmentStore();
+  // const { bids, setBids, loading: bidsLoading } = useBidStore();
 
   // In a real app, you would fetch data from your API here
   useEffect(() => {

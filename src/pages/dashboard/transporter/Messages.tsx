@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Messages = () => {
+const Messages : React.FC = () => {
 
   return (
     <div className="space-y-6">

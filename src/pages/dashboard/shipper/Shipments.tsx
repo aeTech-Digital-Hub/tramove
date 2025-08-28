@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const ShipmentsPage = () => {
+const ShipmentsPage : React.FC = () => {
 
   return (
     <div className="space-y-6">

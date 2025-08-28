@@ -1,7 +1,7 @@
 import assets from '@/assets/assets'
 import Button from '@/components/Button';
 import Card from '@/components/Card';
-import React from 'react'
+// import React from 'react'
 
 const Services = () => {
   return (

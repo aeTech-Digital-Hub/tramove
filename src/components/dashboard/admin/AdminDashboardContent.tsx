@@ -8,20 +8,24 @@ import PendingShipmentsTable, { type PendingShipment } from '../shared/PendingSh
 // Mock data structure
 interface TransporterApplication {
   id: string;
-  shipper: string;
-  cargoType: string;
-  route: string;
-  eta: string;
-  quote: number;
+  shipper?: string;
+  cargoType?: string;
+  route?: string;
+  eta?: string;
+  quote?: number;
+  location?: string;
+  name?: string;
+  vehicleType?: string;
+  capacity?: string;
 }
 
-interface TransporterApplication {
-  id: string;
-  name: string;
-  vehicleType: string;
-  capacity: string;
-  location: string;
-}
+// interface TransporterApplication {
+//   id: string;
+//   name: string;
+//   vehicleType: string;
+//   capacity: string;
+//   location: string;
+// }
 
 const MOCK_SHIPMENTS: PendingShipment[] = [
   {
@@ -119,13 +123,13 @@ const AdminDashboardContent: React.FC = () => {
     setIsAssignModalOpen(true);
   };
 
-  const handleApproveTransporter = async (transporterId: string, transporterName: string) => {
+  const handleApproveTransporter = async (_transporterId: string, transporterName: string) => {
     // TODO: Add API call to approve transporter
     setSuccessMessage(`${transporterName}'s application has been approved successfully`);
     setShowSuccessModal(true);
   };
 
-  const handleRejectTransporter = async (transporterId: string, transporterName: string) => {
+  const handleRejectTransporter = async (_transporterId: string, transporterName: string) => {
     // TODO: Add API call to reject transporter
     setSuccessMessage(`${transporterName}'s application has been rejected`);
     setShowSuccessModal(true);
@@ -245,13 +249,13 @@ const AdminDashboardContent: React.FC = () => {
                       </button>
                       <td className="py-4 flex gap-2 w-full justify-end items-end">
                         <button 
-                          onClick={() => handleRejectTransporter(shipment.id, shipment.name)}
+                          onClick={() => handleRejectTransporter(shipment.id, shipment.name ?? "")}
                           className="px-4 py-2 bg-gray-100 text-red border border-red rounded-full hover:bg-gray-50"
                         >
                           Reject
                         </button>
                         <button 
-                          onClick={() => handleApproveTransporter(shipment.id, shipment.name)}
+                          onClick={() => handleApproveTransporter(shipment.id, shipment.name ?? "")}
                           className="px-4 py-2 text-white bg-green-500 rounded-full hover:bg-green-600"
                         >
                           Approve

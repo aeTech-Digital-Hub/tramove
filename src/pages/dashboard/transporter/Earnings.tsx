@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const EarningsPage = () => {
+const EarningsPage : React.FC = () => {
 
   return (
     <div className="space-y-6">

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FiDownload } from 'react-icons/fi'
-import { FaChevronDown, FaChevronRight, FaArrowRight } from 'react-icons/fa'
+import { FaChevronDown } from 'react-icons/fa'
 
 // Define interfaces for our data types
 interface Transaction {
@@ -14,7 +14,7 @@ interface Transaction {
 
 const Earnings = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'accounts'>('overview');
-  const [timeFilter, setTimeFilter] = useState('Month');
+  const [timeFilter, _setTimeFilter] = useState('Month');
 
   // Sample transaction data
   const transactions: Transaction[] = [

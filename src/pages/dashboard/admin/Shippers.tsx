@@ -27,7 +27,7 @@ const Shippers = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const [selectedShipper, setSelectedShipper] = useState<Shipper | null>(null);
+  const [selectedShipper, _setSelectedShipper] = useState<Shipper | null>(null);
   const [newShipperForm, setNewShipperForm] = useState<NewShipperForm>({
     name: '',
     email: '',
@@ -37,10 +37,10 @@ const Shippers = () => {
     vehicleType: ''
   });
   
-  const handleViewProfile = (shipper: Shipper) => {
-    setSelectedShipper(shipper);
-    setIsProfileModalOpen(true);
-  };
+  // const handleViewProfile = (shipper: Shipper) => {
+  //   setSelectedShipper(shipper);
+  //   setIsProfileModalOpen(true);
+  // };
   
   // Sample data for activeShippers
   const [activeShippers] = useState<Shipper[]>([

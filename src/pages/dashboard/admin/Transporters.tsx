@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaArrowDown, FaStar } from 'react-icons/fa';
+// import { FaArrowDown, FaStar } from 'react-icons/fa';
 import { FiDownload } from 'react-icons/fi';
 import { IoMdClose } from 'react-icons/io';
 

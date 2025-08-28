@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card } from '@/components/ui/card';
 import { FiPackage, FiTruck, FiDollarSign, FiStar } from 'react-icons/fi';
 import { Progress } from '@/components/ui/progress';
-import useAuthStore from '@/store/useAuthStore';
-import useShipmentStore from '@/store/useShipmentStore';
-import useBidStore from '@/store/useBidStore';
+// import useAuthStore from '@/store/useAuthStore';
+// import useShipmentStore from '@/store/useShipmentStore';
+// import useBidStore from '@/store/useBidStore';
 
 interface StatsCardProps {
   title: string;

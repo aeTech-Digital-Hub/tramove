@@ -1,7 +1,6 @@
-import React from 'react'
 import { FaSearch } from 'react-icons/fa'
 
-const ActionCard = ({title, subtext}) => {
+const ActionCard = ({title, subtext} : {title: string, subtext: string}) => {
   return (
     <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center">
         <div className='p-4 rounded-full bg-blue-100 text-2xl text-blue-600'><FaSearch /></div>

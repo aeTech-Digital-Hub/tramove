@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ManagePage = () => {
+const ManagePage : React.FC = () => {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Manage Deliveries</h1>

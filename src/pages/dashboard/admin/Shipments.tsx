@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PendingShipmentsTable, { type PendingShipment } from '@/components/dashboard/shared/PendingShipmentsTable';
 import AssignTransporterModal from '@/components/dashboard/admin/AssignTransporterModal';
 import CreateShipmentModal from '@/components/dashboard/admin/CreateShipmentModal';
