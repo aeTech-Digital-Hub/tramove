@@ -13,6 +13,14 @@ import ShipperDashboardPage from "./pages/dashboard/shipper/Dashboard";
 import AdminDashboardPage from "./pages/dashboard/admin/Dashboard";
 import TransporterDashboardPage from "./pages/dashboard/transporter/Dashboard";
 import Contact from "./pages/Contact";
+import Quote from "./pages/Quote";
+import GetStarted from "./pages/GetStarted";
+import ShipperRegistration from "./pages/auth/ShipperRegistration";
+import TransporterRegistration from "./pages/auth/TransporterRegistration";
+import TransporterLogin from "./pages/auth/TransporterLogin";
+import ShipperLogin from "./pages/auth/ShipperLogin";
+import AdminLogin from "./pages/auth/AdminLogin";
+import Logout from "./pages/auth/Logout";
 
 const queryClient = new QueryClient();
 
@@ -50,8 +58,19 @@ const App = () => {
             <Route path="/" element={<><Navbar /><Index /><Footer /></>} />
             <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
             <Route path="/services" element={<><Navbar /><Services /><Footer /></>} />
-            <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
-            
+            <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />      
+            <Route path="/get-a-quote" element={<><Navbar /><Quote /><Footer /></>} />      
+            <Route path="/get-started" element={<><Navbar /><GetStarted /><Footer /></>} /> 
+
+
+            {/* Auth Pages */}
+            <Route path="/shipper-registration" element={<><Navbar /><ShipperRegistration /><Footer /></>} /> 
+            <Route path="/shipper-login" element={<><Navbar /><ShipperLogin /><Footer /></>} /> 
+            <Route path="/transporter-registration" element={<><Navbar /><TransporterRegistration /><Footer /></>} /> 
+            <Route path="/transporter-login" element={<><Navbar /><TransporterLogin /><Footer /></>} /> 
+            <Route path="/auth/logout" element={<Logout />} />
+            <Route path="/auth/admin-login" element={<><Navbar /><AdminLogin /><Footer /></>} />
+
             {/* Admin Dashboard Routes */}
             <Route path="/dashboard/admin/*" element={<AdminDashboardPage />} />
 
@@ -60,12 +79,6 @@ const App = () => {
 
             {/* Transporter Dashboard Routes */}
             <Route path="/dashboard/transporter/*" element={<TransporterDashboardPage />} />
-
-            {/* 404 Route */}
-            <Route path="*" element={<NotFound />} />
-            <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
-            <Route path="/services" element={<><Navbar /><Services /><Footer /></>} />
-            <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
 
             {/* Role-based dashboard route */}
             <Route path="/dashboard/*" element={<DashboardRoute />} />
