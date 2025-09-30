@@ -5,7 +5,7 @@ import Card from "@/components/Card";
 
 const Index = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-background">
+    <div className="">
       <Hero />
 
       {/* how tramove works */}
@@ -55,7 +55,7 @@ const Index = () => {
       </div>
 
       {/* learn more button */}
-      <div className="mb-20">
+      <div className="m-auto w-36 pb-6">
         <Button>Learn More</Button>
       </div>
 
@@ -64,7 +64,19 @@ const Index = () => {
         <h2 className="m-auto font-bold lg:text-3xl p-8 text-[28px] text-center">
           Our Networks Across Ghana
         </h2>
-        <img src={assets.map} alt="" className=" px-8 m-auto pb-10 rounded-3xl" />
+        <div className="border border-gray-200 rounded-lg overflow-hidden">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254004.5861498787!2d-0.29707989129879893!3d5.593632359242135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9084b2b7a773%3A0xbed14ed8650e2dd3!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sus!4v1693930681722!5m2!1sen!2sus" 
+            width="100%" 
+            height="480" 
+            style={{ border: 0 }} 
+            allowFullScreen={true} 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Our office location in Accra, Ghana"
+            className="w-full"
+          ></iframe>
+        </div>
       </div>
 
       {/* Why choose Tramove */}
