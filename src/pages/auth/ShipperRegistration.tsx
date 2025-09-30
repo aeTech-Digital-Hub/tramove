@@ -24,11 +24,11 @@ const ShipperRegistration: React.FC = () => {
       })
       const [password, setPassword] = useState('')
 
-      const handlePersonalInfo = (e) => {
+      const handlePersonalInfo = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setPersonalInfo({...personalInfo, [e.target.name]: e.target.value })
       }
 
-      const handleCompanyInfo = (e) => {
+      const handleCompanyInfo = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setCompanyInfo({...compayInfo, [e.target.name]: e.target.value})
       }
     

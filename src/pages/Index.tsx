@@ -9,15 +9,15 @@ const Index = () => {
       <Hero />
 
       {/* how tramove works */}
-      <div className="container mx-auto py-10  text-center justify-center items-center mb-3">
-        <h2 className="text-2xl font-bold py-1">How Tramove Works</h2>
+      <div className="container m-auto pt-10  text-center justify-center items-center ">
+        <h2 className="lg:text-2xl text-[18px] font-bold py-1">How Tramove Works</h2>
         <p className="text-gray-10 text-[14px] pb-8">
           Three Simple steps to get your vehicle moved safely and efficiently
         </p>
 
         {/* cards */}
-        <div className="flex gap-4 text-center align-center justify-center m-auto">
-          <div className="grid items-center">
+        <div className="lg:flex gap-4 align-center justify-center m-auto">
+          <div className="grid items-center border border-red p-4 rounded-2xl shadow bg-slate-50 mb-8">
             <div className="bg-red rounded-full justify-center p-2 m-auto items-center">
               <img src={assets.solarBox} alt="" className="w-[33px]" />
             </div>
@@ -28,7 +28,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid items-center">
+          <div className="grid items-center border border-red p-4 rounded-2xl shadow bg-slate-50 mb-8">
             <div className="bg-red rounded-full justify-center p-2 m-auto items-center">
               <img src={assets.trackIcon} alt="" className="w-[33px]" />
             </div>
@@ -41,7 +41,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid items-center">
+          <div className="grid items-center border border-red p-4 rounded-2xl shadow bg-slate-50 mb-8">
             <div className="bg-red rounded-full justify-center m-auto p-2 items-center">
               <img src={assets.location} alt="" className="w-[33px]" />
             </div>
@@ -53,26 +53,27 @@ const Index = () => {
           </div>
         </div>
       </div>
+
       {/* learn more button */}
       <div className="mb-20">
         <Button>Learn More</Button>
       </div>
 
       {/* map Network */}
-      <div className="grid items-center justify-center bg-[#fff4f6] p-13">
-        <h2 className="m-auto font-bold text-2xl p-8">
+      <div className="grid items-center justify-center bg-[#fff4f6] py-13">
+        <h2 className="m-auto font-bold lg:text-3xl p-8 text-[28px] text-center">
           Our Networks Across Ghana
         </h2>
-        <img src={assets.map} alt="" className="w-3/4 m-auto pb-10" />
+        <img src={assets.map} alt="" className=" px-8 m-auto pb-10 rounded-3xl" />
       </div>
 
       {/* Why choose Tramove */}
-      <h2 className="text-center font-bold text-2xl p-6">Why Choose Tramove</h2>
+      <h2 className="text-center font-bold lg:text-3xl text-2xl py-6">Why Choose Tramove</h2>
       <p className="text-center px-6">
         We are dedicated to providing the most reliable and transparent
         automotive Logistic services in ghana
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-6 p-10 m-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 p-10">
         <div className="grid shadow bg-slate-50 p-4">
           <div className="bg-red rounded-full p-2 w-10">
             <img
@@ -120,7 +121,7 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="container flex gap-5 bg-[#fff4f6] p-10 ">
+      <div className="container lg:flex gap-5 bg-[#fff4f6] p-10 ">
         <div className="grid justify-center items-center m-auto">
           <div className="bg-red rounded-full justify-center p-2 m-auto">
             <img src={assets.trackIcon} alt="" className="w-[33px]" />
