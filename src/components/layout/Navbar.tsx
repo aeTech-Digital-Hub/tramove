@@ -65,7 +65,9 @@ const Navbar = () => {
             
             {/* Desktop Button */}
             <div className="hidden md:block">
-              <Button>Get A Quote</Button>
+              <Link to={'/get-a-quote'}>
+                <Button>Get A Quote</Button>
+              </Link>
             </div>
             
             {/* Mobile Hamburger Icon */}

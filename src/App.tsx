@@ -20,7 +20,7 @@ import TransporterRegistration from "./pages/auth/TransporterRegistration";
 import TransporterLogin from "./pages/auth/TransporterLogin";
 import ShipperLogin from "./pages/auth/ShipperLogin";
 import AdminLogin from "./pages/auth/AdminLogin";
-import Logout from "./pages/auth/Logout";
+import Logout from "./pages/auth/LogOut";
 
 const queryClient = new QueryClient();
 

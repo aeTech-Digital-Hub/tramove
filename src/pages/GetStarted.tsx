@@ -14,7 +14,7 @@ const GetStarted : React.FC = () => {
         {/* Shipper Card */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 w-full max-w-xs flex flex-col items-center py-8 px-6">
           <div className="mb-4">
-            <img src={assets.shipper} alt="Shipper" className="w-14 h-14 mx-auto" />
+            <img src={assets.packageicon} alt="Shipper" className="w-14 h-14 mx-auto" />
           </div>
           <h2 className="text-2xl font-bold mb-2">Shipper</h2>
           <p className="font-semibold mb-1">"I need to ship goods."</p>
@@ -24,9 +24,9 @@ const GetStarted : React.FC = () => {
           </Link>
         </div>
         {/* Transporter Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 w-full max-w-xs flex flex-col items-center py-8 px-6">
+        {/* <div className="bg-white rounded-xl shadow-sm border border-gray-200 w-full max-w-xs flex flex-col items-center py-8 px-6">
           <div className="mb-4">
-            <img src={assets.transporter} alt="Transporter" className="w-14 h-14 mx-auto" />
+            <img src={assets.deliveryTrack} alt="Transporter" className="w-14 h-14 mx-auto" />
           </div>
           <h2 className="text-2xl font-bold mb-2">Transporter</h2>
           <p className="font-semibold mb-1 text-center">"I provide transportation services."</p>
@@ -34,7 +34,7 @@ const GetStarted : React.FC = () => {
           <Link to='/transporter-registration'>
             <button className="w-full border-2 border-red text-red rounded-full py-2 px-6 font-semibold hover:bg-red-50 transition">Register as Transporter</button>
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   )

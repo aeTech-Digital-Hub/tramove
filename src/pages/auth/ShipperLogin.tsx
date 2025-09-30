@@ -33,7 +33,7 @@ const ShipperLogin: React.FC = () => {
         {/* Left side illustration */}
         <div className="hidden md:flex justify-center items-center">
           <img 
-            src={assets.register} 
+            src={assets.deliveryTrack2} 
             alt="Shipping Illustration" 
             className="max-w-full"
           />
@@ -42,7 +42,7 @@ const ShipperLogin: React.FC = () => {
         {/* Right side form */}
         <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 w-full max-w-md mx-auto">
           <div className="flex justify-center mb-4">
-            <img src={assets.shipper} alt="Shipper" className="w-12 h-12" />
+            <img src={assets.packageicon} alt="Shipper" className="w-12 h-12" />
           </div>
           
           <h1 className="text-2xl font-bold text-center mb-1">Shipper Login</h1>

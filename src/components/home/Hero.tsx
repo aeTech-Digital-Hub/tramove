@@ -2,11 +2,12 @@
 import Button from '../Button';
 import premuim from '@/assets/fluent_premium-20-regular.png';
 import heroimage from '@/assets/heroImage.png'
+import { Link } from 'react-router-dom';
 
 
 const Hero = () => {
   return (
-    <div className="container mx-auto py-10 bg-[#FFF4F6] h-[110vh] mb-25">
+    <div className="container m-auto py-10 bg-[#FFF4F6] h-[110vh] mb-25">
       <div className="flex items-center justify-center">
         <div className='flex flex-col items-center justify-center'>
           <div className='flex gap-2 place-content-center p-2  border solid rounded-full w-1/2 mt-3'>
@@ -26,7 +27,9 @@ const Hero = () => {
               </p>
             </div>
             <div className='flex gap-2'>
-              <div><Button>Get Started</Button></div>
+              <Link to={'/get-started'}>
+                <div><Button>Get Started</Button></div>
+              </Link>
               <div className='bg-transparent'><Button >Learn More</Button></div>
             </div>
           </div>
