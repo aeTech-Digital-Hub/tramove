@@ -13,7 +13,7 @@ const Card = () => {
               />
             </div>
             <div className="md:max-w-2xl">
-              <h2 className="text-4xl font-bold mb-4">
+              <h2 className="lg:text-4xl text-2xl font-bold mb-4">
                 Ready to <span className="text-red">Streamline</span> Your
                 <br />
                 <span className="text-red">Logistics</span>? Get Started Today!
