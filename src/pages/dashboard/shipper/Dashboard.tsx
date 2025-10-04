@@ -9,6 +9,7 @@ import Payments from './Payments';
 import Notifications from './Notifications';
 import Messages from './Messages';
 import Profile from './Profile';
+import ShipmentBookingForm from './ShipmentBookingForm'
 
 const ShipperDashboardPage: React.FC = () => {
   const location = useLocation();
@@ -26,7 +27,7 @@ const ShipperDashboardPage: React.FC = () => {
     const lastSegment = segments[segments.length - 1];
     if (lastSegment === 'shipper') return 'Welcome, ' + user.name;
     return lastSegment.charAt(0).toUpperCase() + lastSegment.slice(1);
-  };
+  }
 
   return (
     <DashboardLayout userType="shipper" userName={user.name}>
@@ -40,6 +41,7 @@ const ShipperDashboardPage: React.FC = () => {
         <Route path="notifications" element={<Notifications />} />
         <Route path="messages" element={<Messages />} />
         <Route path="profile" element={<Profile />} />
+        <Route path='book-shipment'  element={< ShipmentBookingForm />}/>
       </Routes>
     </DashboardLayout>
   );
