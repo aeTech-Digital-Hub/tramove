@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <div className="container m-auto py-10 bg-[#FFF4F6] lg:h-[100vh] mb-25">
+    <div className="m-auto py-10 bg-[#FFF4F6] lg:h-[100vh] mb-25">
       <div className="flex items-center justify-center">
         <div className='lg:flex flex-col items-center justify-center'>
           <div className='hidden lg:flex gap-2 place-content-center p-2  border solid rounded-full lg:w-1/2 mt-3'>
@@ -26,20 +26,24 @@ const Hero = () => {
                 transparent pricing, and real-time tracking
               </p>
             </div>
-            <div className='flex gap-2 p-4'>
+            <div className='flex gap-2 p-4 items-center'>
               <Link to={'/get-started'}>
                 <div>
                   <Button>Get Started</Button>
                 </div>
               </Link>
-              <div><Button>Learn More</Button></div>
+              <div>
+                <Link to={'/about'}>
+                <button className='border border-rose-400 py-2 px-4 rounded-full hover:bg-rose-600 hover:text-white cursor-pointer ease-in-out duration-300'>Learn More</button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div >
-        <img src={heroimage} alt="" />
+      <div className='m-auto'>
+        <img src={heroimage} alt="" className='m-auto' />
       </div>
 
     </div>

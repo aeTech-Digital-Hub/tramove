@@ -60,7 +60,7 @@ const Index = () => {
       </div>
 
       {/* map Network */}
-      <div className="grid items-center justify-center bg-[#fff4f6] py-13">
+      <div className="grid items-center justify-center bg-[#fff4f6] py-20">
         <h2 className="m-auto font-bold lg:text-3xl p-8 text-[28px] text-center">
           Our Networks Across Ghana
         </h2>
@@ -80,12 +80,12 @@ const Index = () => {
       </div>
 
       {/* Why choose Tramove */}
-      <h2 className="text-center font-bold lg:text-3xl text-2xl py-6">Why Choose Tramove</h2>
+      <h2 className="text-center font-bold lg:text-3xl text-2xl py-10">Why Choose Tramove</h2>
       <p className="text-center px-6">
         We are dedicated to providing the most reliable and transparent
         automotive Logistic services in ghana
       </p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 p-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 py-10 px-20">
         <div className="grid shadow bg-slate-50 p-4">
           <div className="bg-red rounded-full p-2 w-10">
             <img

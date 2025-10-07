@@ -9,32 +9,32 @@ import {
 const About = () => {
   return (
     <div>
-      <div className="container mx-auto py-5 bg-[#FFF4F6] h-[80vh] mb-25 grid lg:grid-cols-2 justify-evenly items-center">
+      <div className="mx-auto   py-5 bg-[#FFF4F6] h-[80vh] max-sm:h-[60vh] max-md:h-[50vh] mb-25 flex  justify-evenly items-center max-sm:px-5 max-sm:grid">
         <div className=" place-content-center">
-          <div className="gap-2 p-2mt-3 w-3/5">
-            <p className="text-red border rounded-full p-2 w-3/5">Tramove Story</p>
+          <div className="gap-2 p-2 mt-3">
+            <p className="text-red border  rounded-full p-2 text-center">Tramove Story</p>
           </div>
           <div className="py-2">
-            <h2 className="text-3xl font-semibold">About Us</h2>
+            <h2 className="lg:text-6xl text-3xl text-center font-bold">About Us</h2>
           </div>
-          <small>Driving Ghana's logistic Forward</small>
+          <small className='text-[20px] text-center'>Driving Ghana's logistic Forward</small>
         </div>
         <div className="">
           <img src={assets.aboutheroimage} alt="" className="" />
         </div>
       </div>
 
-      <div className="container flex gap-4 py-10 items-center justify-center border-b border-grey">
-        <div className="w-1/2">
+      <div className="container lg:flex  gap-4 py-10 items-center justify-center border-b border-grey">
+        <div className="items-center lg:w-[50%]">
           <img src={assets.deliveryTrack2} alt="" />
         </div>
 
-        <div className="w-1/2">
+        <div className="lg:w-[50%]">
           <div>
             <h2 className="text-3xl font-semibold py-2">Our Mission</h2>
           </div>
           <div>
-            <p className="w-4/5">
+            <p className="">
               Tramove is revolutionizing automotive logistics in Ghana by
               combining cutting-edge technology with deep local expertise. We
               bridge the gap between shippers and transporters, ensuring
@@ -52,11 +52,11 @@ const About = () => {
         <h2 className="text-center text-3xl sm:text-1xl font-semibold p-4">
           Our Core values
         </h2>
-        <p className="text-center">
+        <p className="text-center py-4">
           These principles guide everything we do at Tramove
         </p>
 
-        <div className="grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2 container p-10 gap-4">
+        <div className="grid lg:grid-cols-4 max-sm:grid-cols-1 md:grid-cols-2 lg:p-10 gap-4">
           <div className="mx-auto grid items-center bg-slate-50 hover:bg-slate-100 shadow-lg outline outline-none p-10 rounded">
             <img src={assets.innovation} alt="" className="m-auto" />
             <h3 className="font-semibold py-2 text-center">Innovation</h3>
@@ -89,7 +89,7 @@ const About = () => {
       </div>
 
       {/* meet our team */}
-      <div className="border-b border-grey p-10">
+      <div className="border-b border-grey lg:p-10">
         <h2 className="text-center text-3xl sm:text-1xl font-semibold p-4">
           Meet Our Team
         </h2>
@@ -98,8 +98,8 @@ const About = () => {
           business to deliver exceptional results.
         </p>
 
-        <div className="m-auto grid lg:grid-cols-4 sm:grid-cols-1 p-10 gap-2">
-          <div className="mx-auto grid items-center bg-slate-50 shadow-lg outline outline-none p-3 rounded">
+        <div className="m-auto grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2 py-10 gap-2">
+          <div className="grid items-center bg-slate-50 outline outline-none p-3 rounded w-[350px] m-auto shadow">
             <div className="bg-gray-200 p-2 rounded sm:rounded">
               <img src={assets.person1} alt="" className="m-auto" />
             </div>
@@ -133,7 +133,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="mx-auto grid items-center bg-slate-50 shadow-lg outline outline-none p-3 rounded">
+          <div className="mx-auto grid items-center bg-slate-50 outline outline-none p-3 rounded w-[350px] shadow">
             <div className="bg-gray-200 p-2 rounded sm:rounded">
               <img src={assets.person2} alt="" className="m-auto" />
             </div>
@@ -166,7 +166,8 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="mx-auto grid items-center bg-slate-50 shadow-lg outline outline-none p-3 rounded">
+
+          <div className="mx-auto grid items-center bg-slate-50 outline outline-none p-3 rounded w-[350px] shadow">
             <div className="bg-gray-200 p-2 rounded sm:rounded">
               <img src={assets.person3} alt="" className="m-auto" />
             </div>
@@ -199,7 +200,7 @@ const About = () => {
               </div>
             </div>
           </div>
-          <div className="mx-auto grid items-center bg-slate-50 shadow-lg outline outline-none p-3 rounded">
+          <div className="mx-auto grid items-center bg-slate-50 shadow w-[350px] outline outline-none p-3 rounded">
             <div className="bg-gray-200 p-2 rounded sm:rounded">
               <img src={assets.person2} alt="" className="m-auto" />
             </div>
@@ -237,35 +238,35 @@ const About = () => {
 
       {/* Our journey */}
 
-      <div className="container p-10 bg-[#fff4f6] m-auto items-center justify-center mx-auto">
+      <div className="container lg:p-10 bg-[#fff4f6] m-auto items-center justify-center mx-auto">
         <h2 className="text-center text-3xl sm:text-1xl font-semibold p-4">
           Our Journey
         </h2>
-        <p className="text-center">
+        <p className="text-center py-4">
           From a small startup to Ghana's leading Logistics platform
         </p>
 
-        <div className="flex p-10 items-center justify-center m-auto w-2/3 gap-12 ">
+        <div className="flex lg:p-10 items-center justify-center m-auto lg:w-2/3 gap-12 ">
           <div className="grid gap-20 border-r-2 border-grey">
-            <div className="p-6 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
+            <div className="lg:p-6 p-2 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
               <span className="bg-red rounded-full py-2 px-2 text-white text-[12px]">
                 01
               </span>
-              <h3 className="text-1xl font-semibold py-2">
+              <h3 className="lg:text-1xl font-semibold py-2">
                 Tramove is Founded
               </h3>
-              <p>We deliver on our promises, every time</p>
+              <p className='sm:text-[14px]'>We deliver on our promises, every time</p>
             </div>
 
-            <div className="p-6 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
+            <div className="lg:p-6 p-2 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
               <span className="bg-red rounded-full py-2 px-2 m-auto text-white text-[12px]">
                 02
               </span>
-              <h3 className="font-semibold 1xl py-2">Technology Upgrade</h3>
+              <h3 className="font-semibold text-[16px] py-2">Technology Upgrade</h3>
               <p>Lunch of our proprietary tracking and management platform</p>
             </div>
 
-            <div className="p-6 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
+            <div className="lg:p-6 p-2 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
               <span className="bg-red rounded-full py-2 px-2 m-auto text-white text-[12px]">
                 03
               </span>
@@ -276,7 +277,7 @@ const About = () => {
 
           <div className="justify-content items-center">
             <div className="grid gap-20">
-              <div className="p-6 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
+              <div className="lg:p-6 p-2 bg-slate-50 hover:bg-slate-100 rounded shadow w-[80%]">
                 <span className="bg-red rounded-full py-2 px-2 text-white text-[12px]">
                   04
                 </span>

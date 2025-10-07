@@ -49,14 +49,14 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <div className={`container mx-auto py-2 border-b border-gray-200 sticky top-0 z-50 transition-all duration-300 overflow-x-hidden ${
+    <div className={`mx-auto py-2 px-20 border-b border-gray-200 sticky top-0 z-50 transition-all duration-300 overflow-x-hidden ${
       hasScrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-white'
     }`}>
         <div className="flex items-center justify-between">
             <img src={logo} alt="logo" className='w-32' />
             
             {/* Desktop Navigation Links */}
-            <div className='hidden md:flex items-center gap-8 text-lg font-semibold'>
+            <div className='hidden lg:flex items-center gap-8 text-lg font-semibold'>
                 <Link to="/">Home</Link>        
                 <Link to="/services">Services</Link>        
                 <Link to="/about">About</Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
             </div>
             
             {/* Desktop Button */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <Link to={'/get-a-quote'}>
                 <Button>Get A Quote</Button>
               </Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
             
             {/* Mobile Hamburger Icon */}
             <button 
-              className="md:hidden p-2 text-gray-800 focus:outline-none" 
+              className="lg:hidden p-2 text-gray-800 focus:outline-none" 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -118,9 +118,9 @@ const Navbar = () => {
               </Link>
               
               {/* Mobile Button */}
-              <div className="pt-4">
+              <Link to={'/get-a-quote'}>
                 <Button>Get A Quote</Button>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

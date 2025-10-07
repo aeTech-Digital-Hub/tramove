@@ -16,7 +16,7 @@ const Contact = () => {
   return (
     <div className="w-full bg-white border-t border-b border-gray-100">
       {/* Hero section with illustration - exact match to screenshot */}
-      <div className="container mx-auto px-4 md:px-10 py-6 bg-red/5 h-[90vh] flex flex-col justify-center">
+      <div className="mx-auto px-20 max-sm:px-10 py-8 bg-red/5 lg:h-[60vh] flex flex-col justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left side - Text content */}
           <div className="w-full mb-8 md:mb-0 md:pr-8 flex flex-col gap-3">

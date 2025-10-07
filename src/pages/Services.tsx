@@ -6,7 +6,7 @@ import Card from '@/components/Card';
 const Services = () => {
   return (
     <div className="">
-      <div className="grid lg:grid-flow-col 2 md:grid-cols-1 sm:grid-cols-1 gap-2 bg-[#fff4f6] sm:p-5 items-start">
+      <div className="lg:flex md:flex max-sm:grid-cols-1 gap-2 bg-[#fff4f6] sm:p-5 items-start justify-center">
         <div className="p-10">
           <small className="text-red border solid rounded-full p-2 bg-rose-100">
             Shipping Made Simple
@@ -14,7 +14,7 @@ const Services = () => {
           <div className="py-3 text-3xl font-semibold">
             <h1>Our Services</h1>
           </div>
-          <div className="w-2/3">
+          <div className="lg:w-2/3">
             <p>
               Tramove offers comprehensive automotive logistics solutions with
               our team managed quality control
@@ -22,7 +22,7 @@ const Services = () => {
           </div>
         </div>
 
-        <div>
+        <div className='max-sm:px-5 px-20'>
           <img src={assets.serviceHero} alt="" />
         </div>
       </div>
@@ -112,7 +112,7 @@ const Services = () => {
               </div>
               <div className="flex items-center justify-center">
                 <div className="flex">
-                  <p className="text-[12px]">
+                  <p className="text-[12px] w-2xl">
                     <span className="text-[14px] font-medium">
                       Dynamic Pricing:{" "}
                     </span>
@@ -128,7 +128,7 @@ const Services = () => {
               </div>
               <div className="flex items-center justify-center gap-2">
                 <div className="flex">
-                  <p className="text-[12px]">
+                  <p className="text-[12px] w-2xl">
                     <span className="text-[14px] font-medium">
                       Easy Booking Process:{" "}
                     </span>
@@ -143,8 +143,8 @@ const Services = () => {
                 <span className="w-1"></span>
               </div>
               <div className="flex items-center justify-center gap-2">
-                <div className="flex">
-                  <p className="text-[12px]">
+                <div className="flex w-2xl">
+                  <p className="text-[12px] ">
                     <span className="text-[14px] font-medium">
                       Multiple Payment Options:{" "}
                     </span>
@@ -159,7 +159,7 @@ const Services = () => {
                 <span className="w-1"></span>
               </div>
               <div className="flex items-center justify-center gap-2">
-                <div className="flex">
+                <div className="flex w-2xl">
                   <p className="text-[12px]">
                     <span className="text-[14px] font-medium">
                       Transparent Cost:{" "}
@@ -283,7 +283,7 @@ const Services = () => {
               </div>
               <div className="flex items-center justify-center">
                 <div className="flex">
-                  <p className="text-[12px]">
+                  <p className="text-[12px] w-2xl">
                     <span className="text-[14px] font-medium">
                       Multiple Payment Options:{" "}
                     </span>
