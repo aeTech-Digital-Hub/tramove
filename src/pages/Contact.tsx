@@ -22,7 +22,7 @@ const Contact = () => {
     message: '',
   });
 
-  const handleFormChange = (e) => {
+  const handleFormChange = (e : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setUser({...user, [e.target.name]: e.target.value})
   }
 
