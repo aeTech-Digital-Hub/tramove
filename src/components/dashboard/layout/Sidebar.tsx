@@ -65,10 +65,10 @@ const Sidebar: React.FC<SidebarProps> = () => {
       { name: 'Shipment', icon: FiPackage, path: `${basePath}/shipments` },
       { name: 'Track', icon: FiMap, path: `${basePath}/track` },
       { name: 'Report', icon: FiFileText, path: `${basePath}/reports` },
-      { name: 'Payment', icon: FiCreditCard, path: `${basePath}/payments` },
-      { name: 'Notification', icon: FiBell, path: `${basePath}/notifications`, badge: notificationCount },
-      { name: 'Message', icon: FiMessageSquare, path: `${basePath}/messages`, badge: messageCount },
-      { name: 'Profile', icon: FiUser, path: `${basePath}/profile` },
+      // { name: 'Payment', icon: FiCreditCard, path: `${basePath}/payments` },
+      // { name: 'Notification', icon: FiBell, path: `${basePath}/notifications`, badge: notificationCount },
+      // { name: 'Message', icon: FiMessageSquare, path: `${basePath}/messages`, badge: messageCount },
+      // { name: 'Profile', icon: FiUser, path: `${basePath}/profile` },
     ];
   }
 

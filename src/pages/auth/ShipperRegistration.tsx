@@ -44,7 +44,11 @@ const ShipperRegistration: React.FC = () => {
           console.log(personalInfo, compayInfo)
           
           // Redirect to shipper dashboard after successful login
-          navigate('/dashboard/shipper')
+          if(personalInfo){
+            setCompanyInfo(compayInfo)
+          } else if(compayInfo){
+            navigate('/dashboard/shipper')
+          }
         }, 1000)
       }
 
@@ -200,7 +204,7 @@ const ShipperRegistration: React.FC = () => {
                   className="w-full bg-gradient-to-t from-red to-deep-red text-white py-3 rounded-full font-medium hover:bg-red"
                   
                 >
-                  {personalInfo ? 'Company Info' : 'Next'}
+                  {personalInfo?'next': "next"}
                 </button>
                 
                 <div className="mt-4 text-center">

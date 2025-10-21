@@ -38,28 +38,28 @@ const ShipperDashboard: React.FC<ShipperDashboardProps> = ({ user }) => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <StatsCard 
           icon="package" 
-          value="56" 
+          value="0" 
           label="Total Shipments" 
           bgColor="bg-blue-100" 
           textColor="text-blue-600" 
         />
         <StatsCard 
           icon="check" 
-          value="42" 
+          value="0" 
           label="Active Shipment" 
           bgColor="bg-green-100" 
           textColor="text-green-600" 
         />
         <StatsCard 
           icon="clock" 
-          value="14" 
+          value="0" 
           label="Pending Bids" 
           bgColor="bg-yellow-100" 
           textColor="text-yellow-600" 
         />
         <StatsCard 
           icon="dollar" 
-          value="67,500" 
+          value="0" 
           label="Total Spent" 
           bgColor="bg-green-100" 
           textColor="text-green-600" 

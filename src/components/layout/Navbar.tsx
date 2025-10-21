@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo.jpg'
 import { Link } from 'react-router-dom'
 import Button from '../Button'
 import { FiMenu, FiX } from 'react-icons/fi'
@@ -49,7 +49,7 @@ const Navbar = () => {
   }, [isMenuOpen]);
 
   return (
-    <div className={`mx-auto py-2 px-20 border-b border-gray-200 sticky top-0 z-50 transition-all duration-300 overflow-x-hidden ${
+    <div className={`mx-auto py-2 px-20 border-b border-gray-200 sticky top-0 z-100 transition-all duration-300 overflow-x-hidden ${
       hasScrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-white'
     }`}>
         <div className="flex items-center justify-between">
@@ -64,9 +64,12 @@ const Navbar = () => {
             </div>
             
             {/* Desktop Button */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:flex gap-4 items-cente">
               <Link to={'/get-a-quote'}>
                 <Button>Get A Quote</Button>
+              </Link>
+              <Link to={'/shipper-login'}>
+                <button className='border border-red py-2 px-4 rounded-full'>Sign Up</button>
               </Link>
             </div>
             

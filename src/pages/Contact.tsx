@@ -1,6 +1,6 @@
 import assets from '@/assets/assets'
 import Card from '@/components/Card';
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 const Contact = () => {
   // FAQ toggle state management
@@ -13,6 +13,26 @@ const Contact = () => {
       [id]: !prev[id]
     }));
   };
+
+  //Function to handle forms
+  const [user, setUser] = useState({
+    name: '', 
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const handleFormChange = (e) => {
+    setUser({...user, [e.target.name]: e.target.value})
+  }
+
+  const handleFormSubit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setUser({...user})
+    console.log(user)
+  }
+
+
   return (
     <div className="w-full bg-white border-t border-b border-gray-100">
       {/* Hero section with illustration - exact match to screenshot */}
@@ -128,6 +148,8 @@ const Contact = () => {
                     type="text"
                     id="name"
                     name="name"
+                    value={user.name}
+                    onChange={handleFormChange}
                     placeholder="Your full name"
                     className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-500"
                   />
@@ -138,6 +160,8 @@ const Contact = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={user.email}
+                    onChange={handleFormChange}
                     placeholder="Your phone number"
                     className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-500"
                   />
@@ -150,6 +174,8 @@ const Contact = () => {
                   type="text"
                   id="subject"
                   name="subject"
+                  value={user.subject}
+                  onChange={handleFormChange}
                   placeholder="Your topic"
                   className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-500"
                 />
@@ -160,6 +186,8 @@ const Contact = () => {
                 <textarea
                   id="message"
                   name="message"
+                  value={user.message}
+                  onChange={handleFormChange}
                   placeholder="Type your message here"
                   rows={5}
                   className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-500 resize-none"
@@ -169,6 +197,7 @@ const Contact = () => {
               <button 
                 type="submit" 
                 className="w-full bg-gradient-to-t from-red to-deep-red hover:bg-red text-white font-medium py-3 rounded-full transition-colors"
+                onClick={handleFormSubit}
               >
                 Send Message
               </button>

@@ -29,7 +29,7 @@ const Services = () => {
 
       {/* process */}
 
-      <div className="py-10 items-center justify-center mx-auto">
+      <div className="p-10 items-center justify-center mx-auto">
         <h2 className="text-center text-3xl sm:text-1xl font-semibold p-4">
           Our Service Process
         </h2>
@@ -91,10 +91,7 @@ const Services = () => {
         </div>
       </div>
 
-      <div
-        className="grid lg:grid-cols-2 md:grid-cols-1 gap-4 items-start justify-center mx-auto p-10 border-b border-grey
-      "
-      >
+      <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4 items-start justify-center mx-auto p-10 border-b border-grey">
         <div>
           <img src={assets.deliveryTrack2} alt="" />
         </div>
@@ -105,8 +102,8 @@ const Services = () => {
           </div>
           <p className="py-2">Book shipment in minutes with instant quotes.</p>
 
-          <div className="grid gap-4 w-5/6">
-            <div className="flex gap-3 items-center justify-center">
+          <div className="grid gap-4">
+            <div className="flex gap-3 items-start justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -122,7 +119,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -138,7 +135,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -154,7 +151,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -176,8 +173,9 @@ const Services = () => {
           </div>
         </div>
       </div>
+
       <div
-        className="grid lg:grid-cols-2 md:grid-cols-1 gap-4 items-start justify-center mx-auto p-10 border-b border-grey
+        className="grid lg:grid-cols-2 md:grid-cols-1 gap-4 items-start justify-center mx-auto p-20 border-b border-grey
       "
       >
         <div className="">
@@ -187,7 +185,7 @@ const Services = () => {
           <p className="py-2">Track your shipment anytime, anywhere.</p>
 
           <div className="grid gap-4 w-5/6">
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[32rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -203,7 +201,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[32rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -219,7 +217,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -235,7 +233,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -277,7 +275,7 @@ const Services = () => {
           <p className="py-2">Book shipment in minutes with instant quotes.</p>
 
           <div className="grid gap-4 w-5/6">
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -293,7 +291,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -309,7 +307,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
@@ -325,7 +323,7 @@ const Services = () => {
               </div>
             </div>
 
-            <div className="flex gap-3 items-center justify-center">
+            <div className="flex gap-3 items-center justify-center lg:w-[30rem]">
               <div className="bg-red rounded-full w-2 p-2">
                 <span className="w-1"></span>
               </div>
