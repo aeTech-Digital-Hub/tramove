@@ -6,10 +6,10 @@ import logo from '../../assets/logo.svg'
 
 const Footer = () => {
   return (
-    <div className='container mx-auto pt-10 pb-5 overflow-x-hidden'>
+    <div className=' px-40 py-16 bg-black text-white'>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
             <div className='flex flex-col gap-4'>
-                <img src={logo} alt="logo" className='w-32' />
+                <img src={logo} alt="logo" className='w-32 invert' />
                 <p className='text-gray-600 max-w-xs'>Your Partner in Seamless Logistics Across Ghana with Innovative Solutions</p>
             </div>
             <div>
@@ -56,7 +56,7 @@ const Footer = () => {
                 </div>
             </div>
         </div>
-        <div className='border-t border-gray-200 mt-10'>
+        <div className='border-t border-gray-100/50 mt-10'>
             <div className='flex justify-center items-center pt-6 pb-2'>
                 <p className='text-gray-500'>© 2024 Tarmove. All rights reserved.</p>
             </div>

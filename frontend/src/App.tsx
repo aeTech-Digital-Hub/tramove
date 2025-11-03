@@ -46,7 +46,6 @@ const App = () => {
     }
     return <NotFound />;
   };
-  const url = 'http://localhost:4000'
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -64,7 +63,7 @@ const App = () => {
 
 
             {/* Auth Pages */}
-            <Route path="/shipper-registration" element={<><Navbar /><ShipperRegistration url={url} /><Footer /></>} /> 
+            <Route path="/shipper-registration" element={<><Navbar /><ShipperRegistration /><Footer /></>} /> 
             <Route path="/shipper-login" element={<><Navbar /><ShipperLogin /><Footer /></>} /> 
             <Route path="/transporter-registration" element={<><Navbar /><TransporterRegistration /><Footer /></>} /> 
             <Route path="/transporter-login" element={<><Navbar /><TransporterLogin /><Footer /></>} /> 
