@@ -14,6 +14,8 @@ import quote from './quote.png'
 import deliveryTrack2 from './pngwing.com (25) 1.png'
 import trackIcon from './hugeicons_truck.png'
 import aboutheroimage from './aboutImage.png'
+import heroimage1 from './herotrack2.webp'
+import heroimage2 from './herotrack3.webp'
 import reliability from './realiability.png'
 import excellence from './excellence.png'
 import transparency from './tarnsparency.png'
@@ -35,6 +37,8 @@ import menu from './menuIcon.svg'
 const assets = {
    location,
    menu,
+   heroimage1,
+   heroimage2,
    search,
    premuim,
    solarBox,

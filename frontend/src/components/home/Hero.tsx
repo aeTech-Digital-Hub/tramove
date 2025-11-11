@@ -1,29 +1,49 @@
 // import React from 'react'
+import assets from '@/assets/assets';
 import Button from '../Button';
 import premuim from '@/assets/fluent_premium-20-regular.png';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Hero = () => {
+type heroProps = {
+  small: string, 
+  title: string,
+  text: string
+}
+
+
+const Hero = ({title, text, small}: heroProps) => {
+
+  const images = [assets.aboutheroimage, assets.heroImage, assets.heroimage1];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(intervalId);
+  }, [images.length]);
+
+
   return (
-    <div className='flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-[url("/src/assets/herotrack1.jpg")] bg-no-repeat bg-cover bg-center h-screen relative'>
-      <div className='bg-black/50 absolute top-0 left-0 bottom-0 right-0 h-screen'></div>
+    <div className={`flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-no-repeat bg-cover bg-center h-screen relative`} style={{backgroundImage: `url(${images[currentImageIndex]})`}}>
+      <div className='bg-black/80 absolute top-0 left-0 bottom-0 right-0 h-screen'></div>
       <div className="flex items-center z-10">
         <div className='lg:flex flex-col items-start'>
-          <div className='hidden lg:flex gap-2 place-content-center p-2  border border-red/70 rounded-full mt-[-3]'>
+          <div className='hidden lg:flex gap-2 place-content-center p-2  border border-red/50 rounded-full mt-[-3]'>
             <img src={premuim} alt="" />
-            <p className='text-[12px] text-white w-fit'>Ghana's Premier Automotive Logistic Solution</p>
+            <p className='text-[12px] text-white w-fit'>{small}</p>
           </div>
           <div className='flex flex-col items-start mt-8'>
             <div className='p-2 m-1'>
-              <h1 className='lg:text-6xl text-3xl font-bold lg:w-[70%]'>
-                Your Partner in <span className='text-red'>Seamless Logistics</span> <br />  Across-Ghana
+              <h1 className='lg:text-6xl text-3xl font-bold lg:w-[70%] text-red/50'>
+                {title}
               </h1>
             </div>
             <div className='lg:w-2/4 pb-4 mt-8'>
               <p className='text-start p-2 text-[20px] font-meduim'>
-                Tramove simplifies cargo transport in Ghana with vetted carriers
-                transparent pricing, and real-time tracking
+                {text}
               </p>
             </div>
             <div className='flex gap-2 p-4 items-center'>

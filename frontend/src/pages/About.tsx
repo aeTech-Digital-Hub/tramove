@@ -1,5 +1,6 @@
 // import React from 'react'
 import assets from '@/assets/assets'
+import Hero from '@/components/home/Hero';
 import {
   FaInstagram,
   FaFacebookF,
@@ -9,19 +10,8 @@ import {
 const About = () => {
   return (
     <div>
-      <div className="mx-auto py-5 mt-20 bg-[#FFF4F6] h-[80vh] max-sm:h-[60vh] max-md:h-[50vh] mb-25 flex  justify-evenly items-center max-sm:px-5 max-sm:grid">
-        <div className=" place-content-center">
-          <div className="gap-2 p-2 mt-3">
-            <p className="text-red border  rounded-full p-2 text-center">Tramove Story</p>
-          </div>
-          <div className="py-2">
-            <h2 className="lg:text-6xl text-3xl text-center font-bold">About Us</h2>
-          </div>
-          <small className='text-[20px] text-center'>Driving Ghana's logistic Forward</small>
-        </div>
-        <div className="">
-          <img src={assets.aboutheroimage} alt="" className="" />
-        </div>
+      <div className="">
+        <Hero small='Tramove Story' title='About Us' text="Driving Ghana's logistic Forward"/>
       </div>
 
       <div className="container lg:flex  gap-4 py-10 items-center justify-center border-b border-grey">

@@ -1,15 +1,16 @@
 import assets from "@/assets/assets"
 import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
+// import { useNavigate, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 
 const ShipperRegistration = () => {
       // Navigation hook
-      const navigate = useNavigate()
+      //const navigate = useNavigate()
       
       // Form state
-      const [currentState, setCurrentState] = useState('Sign up')
+      //const [currentState, setCurrentState] = useState('Sign up')
       const [shipperInfo, setShipperInfo] = useState({
         email: '',
         name: '',
@@ -20,13 +21,13 @@ const ShipperRegistration = () => {
         password: ''
       })
 
-      const handlePersonalInfo = (e) => {
+      const handlePersonalInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
         setShipperInfo({...shipperInfo, [e.target.name]: e.target.value })
       }
 
     
       // Handle form submission
-      const handleSubmit = (e) => {
+      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
       }
 

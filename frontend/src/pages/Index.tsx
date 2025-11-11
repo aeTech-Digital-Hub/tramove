@@ -6,7 +6,7 @@ import Card from "@/components/Card";
 const Index = () => {
   return (
     <div className="">
-      <Hero />
+      <Hero small={"Ghana's Premier Automotive Logistic Solution"} title={`Your Partner in Seamless Logistics Across-Ghana`} text={' Tramove simplifies cargo transport in Ghana with vetted carriers transparent pricing, and real-time tracking'} />
 
       {/* how tramove works */}
       <div className=" grid lg:grid-cols-2 gap-12 m-auto pb-10 pl-40 text-center justify-center items-center ">
