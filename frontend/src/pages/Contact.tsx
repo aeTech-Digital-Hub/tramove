@@ -1,8 +1,16 @@
 import assets from '@/assets/assets'
 import Card from '@/components/Card';
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+
+  const form = useRef()
+
+  // const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  // };
+
   // FAQ toggle state management
   const [openFAQs, setOpenFAQs] = useState<Record<string, boolean>>({});
   
@@ -28,7 +36,26 @@ const Contact = () => {
 
   const handleFormSubit = (e: React.FormEvent) => {
     e.preventDefault()
-    setUser({...user})
+    if(form.current){
+      emailjs
+      .sendForm('Tramove_2025', 'template_lkz0m7v', form.current, {
+        publicKey: '7_X7BAG6U_84kyg5T',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error: unknown) => {
+          console.error('FAILED...', error);
+        },
+      );
+    }
+   
+    setUser({
+      name: '', 
+      email: '',
+      subject: '',
+      message: '',})
     console.log(user)
   }
 
@@ -140,7 +167,7 @@ const Contact = () => {
           {/* Right column - Contact form */}
           <div className='bg-white p-8 rounded-lg shadow-lg'>
             <h2 className="text-2xl font-semibold mb-4">Send Us a Message</h2>
-            <form className="space-y-4">
+            <form rel='form' onSubmit={handleFormSubit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                   <label htmlFor="name" className="block mb-1 text-sm text-gray-600">Name</label>
