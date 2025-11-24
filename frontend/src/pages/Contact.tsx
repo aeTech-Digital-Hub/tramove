@@ -7,10 +7,6 @@ const Contact = () => {
 
   const form = useRef()
 
-  // const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  // };
-
   // FAQ toggle state management
   const [openFAQs, setOpenFAQs] = useState<Record<string, boolean>>({});
   

@@ -1,4 +1,5 @@
 import assets from '@/assets/assets'
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -7,24 +8,32 @@ const ShipperLogin: React.FC = () => {
   const navigate = useNavigate()
   
   // Form state
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [userData, setUserData] = useState({
+    email: '',
+    password: ''
+  })
   const [isLoading, setIsLoading] = useState(false)
 
+  const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>{
+    setUserData({...userData, [e.target.name]: e.target.value})
+  }
+
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsLoading(true)
-    
-    // Simulate authentication process
-    setTimeout(() => {
-      // In a real app, you would validate credentials with your backend
-      console.log({ email, password })
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URI}/login`, userData)
+      console.log(response);
+      if(response.status === 200){
+        navigate('/dashboard/shipper')
+        setIsLoading(false)
+      }
       
-      // Redirect to shipper dashboard after successful login
-      setIsLoading(false)
-      navigate('/dashboard/shipper')
-    }, 1000)
+    } catch (error) {
+      console.log(error);
+      
+    }
+    setIsLoading(true)
   }
 
   return (
@@ -55,8 +64,8 @@ const ShipperLogin: React.FC = () => {
               <label className="block mb-1 font-medium">Email Address</label>
               <input 
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={userData.email}
+                onChange={changeInputHandler}
                 placeholder="Enter your email address"
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
                 required
@@ -67,8 +76,8 @@ const ShipperLogin: React.FC = () => {
               <label className="block mb-1 font-medium">Password</label>
               <input 
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={userData.password}
+                onChange={changeInputHandler}
                 placeholder="Enter your password"
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
                 required

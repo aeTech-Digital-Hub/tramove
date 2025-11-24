@@ -1,17 +1,23 @@
 import assets from '@/assets/assets'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 
 
 const Quote : React.FC = () => {
   // Form state
   const [typeOfGoods, setTypeOfGoods] = useState('')
-  const [weight, setWeight] = useState('')
-  const [dimensions, setDimensions] = useState('')
-  const [origin, setOrigin] = useState('')
-  const [destination, setDestination] = useState('')
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
+  const [quoteData, setQuoteData] = useState({
+    weight: '',
+    dimensions: '',
+    origin: '',
+    destination:'',
+    name: '',
+    phone: '',
+    email: ''
+  })
+  
   const [showQuote, setShowQuote] = useState(false)
   const [quote, setQuote] = useState({
     total: 0,
@@ -19,16 +25,42 @@ const Quote : React.FC = () => {
     fee: 0
   })
 
+  const handleQuoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuoteData({...quoteData, [e.target.name]: e.target.value})
+  }
+
+
+
+
+  const navigate = useNavigate()
+  const [error, setError] = useState(false)
+
   // Simple calculation logic
-  const calculateQuote = (e: React.FormEvent) => {
+  const calculateQuote = async (e: React.FormEvent) => {
     e.preventDefault()
     // Example: base transport fee = weight * 10, fee = 15%
-    const w = Number(weight) || 0
+    const w = Number(quoteData.weight) || 0
     const transport = w * 10
     const fee = Math.round(transport * 0.15)
     const total = transport + fee
     setQuote({ total, transport, fee })
     setShowQuote(true)
+
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URI}/quote`,  quoteData)
+      if(response.statusText === 'OK'){
+        navigate('/dashboard/shipper')
+      }
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data?.message ?? "Unexpected error")
+      } else {
+        setError(error)
+      }
+    }
+
+   
   }
 
   return (
@@ -45,6 +77,7 @@ const Quote : React.FC = () => {
       {/* Quote Form UI */}
       <div className="max-w-6xl mx-auto bg-white rounded-xl border border-gray-300 shadow-sm p-8 mb-8">
         <form onSubmit={calculateQuote}>
+          {error && <p>{error}</p>}
           <h2 className="text-xl font-semibold mb-6">Cargo Details</h2>
           <div className="mb-6">
             <label className="block font-medium mb-2">Type of Goods</label>
@@ -59,37 +92,59 @@ const Quote : React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block font-medium mb-2">Weight (kg)</label>
-              <input type="number" value={weight} onChange={e => setWeight(e.target.value)} placeholder="Enter weight" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
+              <input 
+                type="number" 
+                value={quoteData.weight}
+                name='weight' 
+                onChange={handleQuoteChange} 
+                placeholder="Enter weight" 
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
             </div>
             <div>
               <label className="block font-medium mb-2">Dimensions (LxWxH in cm)</label>
-              <input type="text" value={dimensions} onChange={e => setDimensions(e.target.value)} placeholder="Weight (kg)" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
+              <input 
+                type="text" 
+                name='dimensions'
+                value={quoteData.dimensions} 
+                onChange={handleQuoteChange} 
+                placeholder="Weight (kg)" 
+                className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block font-medium mb-2">Origin</label>
-              <input type="text" value={origin} onChange={e => setOrigin(e.target.value)} placeholder="City, Country" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
+              <input 
+                type="text" 
+                name='origin'
+                value={quoteData.origin} 
+                onChange={handleQuoteChange} 
+                placeholder="City, Country" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
             </div>
             <div>
               <label className="block font-medium mb-2">Destination</label>
-              <input type="text" value={destination} onChange={e => setDestination(e.target.value)} placeholder="Weight (kg)" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
+              <input 
+                type="text" 
+                name='destination'
+                value={quoteData.destination} 
+                onChange={handleQuoteChange} 
+                placeholder="Weight (kg)" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
             </div>
           </div>
           <h2 className="text-xl font-semibold mb-6 mt-8">Contact Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label className="block font-medium mb-2">Name</label>
-              <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Your full name" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
+              <input type="text" name='name' value={quoteData.name} onChange={handleQuoteChange} placeholder="Your full name" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
             </div>
             <div>
               <label className="block font-medium mb-2">Phone</label>
-              <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="Your phone number" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
+              <input type="tel" name='phone' value={quoteData.phone} onChange={handleQuoteChange} placeholder="Your phone number" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
             </div>
           </div>
           <div className="mb-8">
             <label className="block font-medium mb-2">Email Address</label>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Your email address" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
+            <input type="email" name='email' value={quoteData.email} onChange={handleQuoteChange} placeholder="Your email address" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
           </div>
           <button type="submit" className="w-full py-2 rounded-full bg-gradient-to-r from-red to-deep-red text-white font-semibold text-base shadow-md hover:from-red hover:to-deep-red transition-all">Calculate Quote</button>
         </form>
@@ -100,7 +155,7 @@ const Quote : React.FC = () => {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Your Estimated Quote</h3>
-                  <div className="text-gray-700 mb-2">{origin || 'Origin'} to {destination || 'Destination'} <span className="mx-1">•</span> {typeOfGoods || 'Type'}</div>
+                  <div className="text-gray-700 mb-2">{origin || 'Origin'} to {quoteData.destination || 'Destination'} <span className="mx-1">•</span> {typeOfGoods || 'Type'}</div>
                   <div className="text-3xl font-bold text-gray-900 mb-2">GHS {quote.total.toLocaleString()}</div>
                   <div className="flex justify-between text-gray-700 text-sm mb-1">
                     <span>Transport fee:</span>
