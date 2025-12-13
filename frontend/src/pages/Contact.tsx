@@ -74,6 +74,7 @@ const Contact = () => {
               src={assets.serviceHero}
               alt="Delivery service illustration" 
               className="w-90"
+              loading='lazy'
             />
           </div>
         </div>
@@ -98,7 +99,7 @@ const Contact = () => {
               <div className="flex items-center">
                 <div className="w-12 h-12">
                   <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                    <img src={assets.location} alt="Location icon" className="w-5 h-5" />
+                    <img src={assets.location} loading='lazy' alt="Location icon" className="w-5 h-5" />
                   </div>
                 </div>
                 <div>
@@ -110,7 +111,7 @@ const Contact = () => {
               <div className="flex items-center">
                 <div className="w-12 h-12">
                   <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                    <img src={assets.packageicon} alt="Phone icon" className="w-5 h-5" />
+                    <img src={assets.packageicon} loading='lazy' alt="Phone icon" className="w-5 h-5" />
                   </div>
                 </div>
                 <div>
@@ -122,7 +123,7 @@ const Contact = () => {
               <div className="flex items-center">
                 <div className="w-12 h-12">
                   <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
-                    <img src={assets.packageicon} alt="Email icon" className="w-5 h-5" />
+                    <img src={assets.packageicon} loading='lazy' alt="Email icon" className="w-5 h-5" />
                   </div>
                 </div>
                 <div>
@@ -297,6 +298,7 @@ const Contact = () => {
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
+                
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>

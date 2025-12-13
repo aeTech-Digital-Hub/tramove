@@ -23,7 +23,7 @@ const Services = () => {
         </div>
 
         <div className='max-sm:px-5 px-20'>
-          <img src={assets.serviceHero} alt="" />
+          <img src={assets.serviceHero} alt="service" loading='eager' />
         </div>
       </div>
 
@@ -93,7 +93,7 @@ const Services = () => {
 
       <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4 items-start justify-center mx-auto p-10 border-b border-grey">
         <div>
-          <img src={assets.deliveryTrack2} alt="" />
+          <img src={assets.deliveryTrack2} alt="track"  loading='lazy'/>
         </div>
 
         <div className="">

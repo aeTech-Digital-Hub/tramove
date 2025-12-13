@@ -16,7 +16,7 @@ const About = () => {
 
       <div className="container lg:flex  gap-4 py-10 items-center justify-center border-b border-grey">
         <div className="items-center lg:w-[50%]">
-          <img src={assets.deliveryTrack2} alt="" />
+          <img src={assets.deliveryTrack2} loading='eager' alt="" />
         </div>
 
         <div className="lg:w-[50%]">
@@ -192,7 +192,7 @@ const About = () => {
           </div>
           <div className="mx-auto grid items-center bg-slate-50 shadow w-[350px] outline outline-none p-3 rounded">
             <div className="bg-gray-200 p-2 rounded sm:rounded">
-              <img src={assets.person2} alt="" className="m-auto" />
+              <img src={assets.person2} loading='lazy' alt="" className="m-auto" />
             </div>
             <h3 className="font-semibold py-2 text-center">Sharaf Mohammend</h3>
             <p className="text-center text-red">Chief Technology Officer</p>

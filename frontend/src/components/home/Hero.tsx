@@ -27,7 +27,7 @@ const Hero = ({title, text, small}: heroProps) => {
 
 
   return (
-    <div className={`flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-no-repeat bg-cover bg-center h-screen relative`} style={{backgroundImage: `url(${images[currentImageIndex]})`}}>
+    <div className={`flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-no-repeat bg-cover bg-center h-screen relative`} style={{backgroundImage: `url(${images[currentImageIndex]})`,}}>
       <div className='bg-black/80 absolute top-0 left-0 bottom-0 right-0 h-screen'></div>
       <div className="flex items-center z-10">
         <div className='lg:flex flex-col items-start'>

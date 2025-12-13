@@ -90,7 +90,7 @@ const Quote : React.FC = () => {
           <h1 className='text-3xl md:text-6xl font-bold'>Get a <span className='text-red'>Quote</span> in Minutes</h1>
           <p className='md:text-xl'>Calculate your shipping cost in seconds with our instant quote calculator. No hidden fees, just transparent pricing.</p>
         </div>
-        <img src={assets.quote} alt="Quote Illustration" />
+        <img src={assets.quote} alt="Quote Illustration" loading='eager' />
       </div>
 
       {/* Quote Form UI */}
