@@ -1,20 +1,46 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
-interface ShipmentProps {
-  id: string;
+// interface ShipmentProps {
+//   id: string;
+//   origin: string;
+//   destination: string;
+//   status: 'Pending Assignment' | 'In Transit' | 'Cancelled';
+// }
+
+interface Shipment {
+  _id: string;
   origin: string;
   destination: string;
-  status: 'Pending Assignment' | 'In Transit' | 'Cancelled';
+  status: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  createdAt?: string;
 }
 
+
+const shipper = JSON.parse(localStorage.getItem('shipper')!)
+
 const ActiveShipments: React.FC = () => {
-  // Sample shipment data based on the image
-  const shipments: ShipmentProps[] = [
-    { id: '123456', origin: 'Accra', destination: 'Kumasi', status: 'Pending Assignment' },
-    { id: '123456', origin: 'Tema', destination: 'Cape Coast', status: 'In Transit' },
-    { id: '123456', origin: 'Accra', destination: 'Tamale', status: 'Cancelled' }
-  ];
+  const [shipments, setShipments] = useState<Shipment[]>([]);
+  const token = localStorage.getItem('token')
+  
+  const getShipments = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/shipper/${shipper._id}/quotes`, {headers: { Authorization: `Bearer ${token}`}})
+      console.log(response);
+      console.log(response.data.shipments);
+      setShipments(response.data.shipments)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  useEffect(() => {getShipments()}, [])
 
   const getStatusInfo = (status: string) => {
     switch (status) {
@@ -68,10 +94,11 @@ const ActiveShipments: React.FC = () => {
               style={{ borderLeftWidth: '4px', borderLeftColor: borderColor }}
             >
               <div className="p-3">
-                <p className="font-medium text-sm">Shipment #{shipment.id}</p>
+                <p className="font-medium text-sm">Shipment #{shipment._id}</p>
                 <p className="text-gray-500 text-xs my-1">{shipment.origin} → {shipment.destination}</p>
               </div>
               <div className="flex justify-between items-center mt-2">
+                
                   <span className={`text-xs px-3 py-1 rounded-full ${bgColor} ${textColor}`}>
                     {displayText}
                   </span>
@@ -82,9 +109,11 @@ const ActiveShipments: React.FC = () => {
       </div>
       
       <div className="text-center mt-3">
+      <Link to={'/shipments'}>
         <button className="text-red text-xs flex items-center text-center">
           See all
         </button>
+        </Link>
       </div>
     </div>
   );

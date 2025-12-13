@@ -1,11 +1,13 @@
-import React from 'react'
+import type { ReactNode } from "react";
 
-const Button = ({children}: {children: React.ReactNode}) => {
-  return (
-    <div className='bg-red text-white px-4 py-2 rounded-full hover:bg-rose-500 font-semibold cursor-pointer flex items-center gap-2'>
-        {children}
-    </div>
-  )
+interface ButtonProps {
+  children: ReactNode;
+  onClick?: () => void;
+  className?: string;
 }
 
-export default Button
+const Button = ({ children, ...props }: ButtonProps) => {
+  return <button {...props}>{children}</button>;
+};
+
+export default Button;

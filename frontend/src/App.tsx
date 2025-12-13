@@ -21,6 +21,7 @@ import TransporterLogin from "./pages/auth/TransporterLogin";
 import ShipperLogin from "./pages/auth/ShipperLogin";
 import AdminLogin from "./pages/auth/AdminLogin";
 import Logout from "./pages/auth/LogOut";
+import { ToastContainer } from 'react-toastify';
 
 const queryClient = new QueryClient();
 
@@ -46,8 +47,10 @@ const App = () => {
     }
     return <NotFound />;
   };
+
   return (
     <QueryClientProvider client={queryClient}>
+      <ToastContainer />
       <TooltipProvider>
         <Toaster />
         <Sonner />

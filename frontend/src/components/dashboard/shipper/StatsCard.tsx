@@ -3,7 +3,7 @@ import { FiPackage, FiCheck, FiClock, FiDollarSign } from 'react-icons/fi';
 
 interface StatsCardProps {
   icon: 'package' | 'check' | 'clock' | 'dollar';
-  value: string;
+  value: number | string;
   label: string;
   bgColor: string;
   textColor: string;

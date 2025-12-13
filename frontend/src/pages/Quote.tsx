@@ -2,10 +2,13 @@ import assets from '@/assets/assets'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 
 const Quote : React.FC = () => {
+  const shipper = JSON.parse(localStorage.getItem('shipper')!)
+
   // Form state
   const [typeOfGoods, setTypeOfGoods] = useState('')
   const [quoteData, setQuoteData] = useState({
@@ -17,6 +20,8 @@ const Quote : React.FC = () => {
     phone: '',
     email: ''
   })
+  
+
   
   const [showQuote, setShowQuote] = useState(false)
   const [quote, setQuote] = useState({
@@ -38,19 +43,33 @@ const Quote : React.FC = () => {
   // Simple calculation logic
   const calculateQuote = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Example: base transport fee = weight * 10, fee = 15%
-    const w = Number(quoteData.weight) || 0
-    const transport = w * 10
-    const fee = Math.round(transport * 0.15)
-    const total = transport + fee
+    const w = Number(quoteData.weight) || 0;
+      const transport = w * 10;
+      const fee = Math.round(transport * 0.15);
+      const total = transport + fee;
     setQuote({ total, transport, fee })
     setShowQuote(true)
 
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URI}/quote`,  quoteData)
+      const token = localStorage.getItem('token')
+
+      if(!token){
+        toast.error('Please Register or Login to create a quote')
+        navigate('/shipper-login')
+      } 
+      
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/quote/create-quote/${shipper._id}`,  quoteData, {headers: { Authorization: `Bearer ${token}`}})
+      console.log(response);
+      
+
       if(response.statusText === 'OK'){
+        const savedQuote = localStorage.setItem('quote', JSON.stringify(quoteData))
+        toast(response.data.message)
         navigate('/dashboard/shipper')
+        console.log(savedQuote);
+        return savedQuote
+        
       }
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
@@ -93,7 +112,7 @@ const Quote : React.FC = () => {
             <div>
               <label className="block font-medium mb-2">Weight (kg)</label>
               <input 
-                type="number" 
+                type="Number" 
                 value={quoteData.weight}
                 name='weight' 
                 onChange={handleQuoteChange} 
@@ -146,7 +165,7 @@ const Quote : React.FC = () => {
             <label className="block font-medium mb-2">Email Address</label>
             <input type="email" name='email' value={quoteData.email} onChange={handleQuoteChange} placeholder="Your email address" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
           </div>
-          <button type="submit" className="w-full py-2 rounded-full bg-gradient-to-r from-red to-deep-red text-white font-semibold text-base shadow-md hover:from-red hover:to-deep-red transition-all">Calculate Quote</button>
+          {<button type="submit" className="w-full py-2 rounded-full bg-gradient-to-r from-red to-deep-red text-white font-semibold text-base shadow-md hover:from-red hover:to-deep-red transition-all">calculate quote</button>}
         </form>
         {/* Estimated Quote Card UI - only show after calculation */}
         {showQuote && (
@@ -155,7 +174,7 @@ const Quote : React.FC = () => {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Your Estimated Quote</h3>
-                  <div className="text-gray-700 mb-2">{origin || 'Origin'} to {quoteData.destination || 'Destination'} <span className="mx-1">•</span> {typeOfGoods || 'Type'}</div>
+                  <div className="text-gray-700 mb-2">{quoteData.origin || 'Origin'} to {quoteData.destination || 'Destination'} <span className="mx-1">•</span> {typeOfGoods || 'Type'}</div>
                   <div className="text-3xl font-bold text-gray-900 mb-2">GHS {quote.total.toLocaleString()}</div>
                   <div className="flex justify-between text-gray-700 text-sm mb-1">
                     <span>Transport fee:</span>
@@ -171,9 +190,10 @@ const Quote : React.FC = () => {
                   <span role="img" aria-label="truck">🚚</span>
                 </div>
               </div>
-              <div className="text-xs text-gray-600 mt-2">
+              <div className="text-xs text-gray-600 mt-2 mb-4">
                 This is an estimate based on standard rates. Final price may vary based on specific vehicle details and route conditions. After booking, our admin team will match you with the perfect transporter within 24-48 hours.
               </div>
+              
             </div>
           </div>
         )}

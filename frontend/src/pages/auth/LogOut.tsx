@@ -7,8 +7,9 @@ const LogOut = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate('/login')
+    navigate('/shipper-login')
   }, [])
+
   return (
     <div>LogOut</div>
   )

@@ -2,6 +2,7 @@ import assets from '@/assets/assets'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const ShipperLogin: React.FC = () => {
   // Navigation hook
@@ -13,6 +14,7 @@ const ShipperLogin: React.FC = () => {
     password: ''
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('');
 
   const changeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>{
     setUserData({...userData, [e.target.name]: e.target.value})
@@ -20,21 +22,42 @@ const ShipperLogin: React.FC = () => {
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
+    setIsLoading(true);
+  
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URI}/login`, userData)
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/shipper/login`,
+        userData
+      );
+  
       console.log(response);
-      if(response.status === 200){
-        navigate('/dashboard/shipper')
-        setIsLoading(false)
+  
+      if (response.data.success) {
+        const {token, shipper} = response.data
+        // Save token
+        localStorage.setItem("token", token);
+
+        localStorage.setItem("shipper", JSON.stringify(shipper));
+  
+        // Navigate to shipper dashboard
+        navigate("/dashboard/shipper");
+        toast('Login Successfully')
       }
-      
-    } catch (error) {
-      console.log(error);
-      
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setErrorMsg(err.response?.data?.message ?? "Unexpected error");
+      } else if (err instanceof Error) {
+        setErrorMsg(err.message);
+      } else {
+        setErrorMsg("Unknown error occurred");
+      }
     }
-    setIsLoading(true)
-  }
+    finally {
+      setIsLoading(false);
+    }
+  };
+  
 
   return (
     <div className="min-h-screen bg-[#FFF4F6] flex justify-center items-center p-4">
@@ -60,10 +83,13 @@ const ShipperLogin: React.FC = () => {
           </p>
           
           <form onSubmit={handleSubmit}>
+          {errorMsg && <p className="text-red-600 text-sm mb-4">{errorMsg}</p>}
+
             <div className="mb-4">
               <label className="block mb-1 font-medium">Email Address</label>
               <input 
                 type="email"
+                name='email'
                 value={userData.email}
                 onChange={changeInputHandler}
                 placeholder="Enter your email address"
@@ -76,6 +102,7 @@ const ShipperLogin: React.FC = () => {
               <label className="block mb-1 font-medium">Password</label>
               <input 
                 type="password"
+                name='password'
                 value={userData.password}
                 onChange={changeInputHandler}
                 placeholder="Enter your password"
@@ -91,13 +118,13 @@ const ShipperLogin: React.FC = () => {
             </div>
             
             <button 
-              type="submit" 
-              className="w-full bg-gradient-to-t from-red to-deep-red text-white py-3 rounded-full font-medium hover:bg-red"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Signing in...' : 'Sign In'}
-            </button>
-            
+  type="submit" 
+  className="w-full bg-gradient-to-t from-red to-deep-red text-white py-3 rounded-full font-medium hover:bg-red"
+  disabled={isLoading}
+>
+  {isLoading ? 'Signing in...' : 'Sign In'}
+</button>
+
             <div className="mt-4 text-center">
               Don't have an account? <Link to="/shipper-registration" className="text-red hover:underline font-medium">Sign Up</Link>
             </div>

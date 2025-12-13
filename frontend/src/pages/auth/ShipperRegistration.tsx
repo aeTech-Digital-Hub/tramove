@@ -1,7 +1,7 @@
 import assets from "@/assets/assets"
 import { useState } from "react"
-// import { useNavigate, Link } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 
 
@@ -15,11 +15,13 @@ const ShipperRegistration = () => {
         email: '',
         name: '',
         phone: '',
-        companyName: '',
+        company: '',
         address: '',
         industry: '',
         password: ''
       })
+      const [error, setError] = useState(false)
+      const navigate = useNavigate()
 
       const handlePersonalInfo = (e: React.ChangeEvent<HTMLInputElement>) => {
         setShipperInfo({...shipperInfo, [e.target.name]: e.target.value })
@@ -27,9 +29,28 @@ const ShipperRegistration = () => {
 
     
       // Handle form submission
-      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-      }
+      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        try {
+          const response = await axios.post(
+            `${import.meta.env.VITE_API_URL}/shipper/register`,
+            shipperInfo
+          );
+      
+          if (response.status === 200 || response.status === 201) {
+            // setToken(response.data.token);
+            // localStorage.setItem("token", response.data.token);
+            navigate("/shipper-login");
+          }
+          
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            setError(error?.response?.data?.message || "An error occurred");
+          }
+        }
+      };
+      
 
 
   return (
@@ -56,6 +77,7 @@ const ShipperRegistration = () => {
               </p>
               
               <form onSubmit={handleSubmit}>
+                {error && <p>{error}</p>}
                 <div> 
                     <div className="mb-4">
                     <label className="block mb-1 font-medium">Full Name</label>
@@ -103,9 +125,9 @@ const ShipperRegistration = () => {
                   <label className="block mb-1 font-medium">Company Name</label>
                   <input 
                     type="text"
-                    value={shipperInfo.companyName}
+                    value={shipperInfo.company}
                     onChange={handlePersonalInfo}
-                    name="companyName"
+                    name="company"
                     placeholder="Enter your company name"
                     className="w-full border border-gray-300 rounded-md px-3 py-2"
                     required
@@ -144,7 +166,8 @@ const ShipperRegistration = () => {
                 <div className="mb-2">
                   <label className="block mb-1 font-medium">Password</label>
                   <input 
-                    type="text"
+                    type={shipperInfo.password?"password": ''}
+                    name="password"
                     value={shipperInfo.password}
                     onChange={handlePersonalInfo}
                     placeholder="Enter your password"
@@ -153,7 +176,7 @@ const ShipperRegistration = () => {
                   />
                 </div>
 
-                <div className="mb-2">
+                {/* <div className="mb-2">
                   <label className="block mb-1 font-medium">Password</label>
                   <input 
                     type="text"
@@ -163,7 +186,7 @@ const ShipperRegistration = () => {
                     className="w-full border border-gray-300 rounded-md px-3 py-2"
                     required
                   />
-                </div>
+                </div> */}
                 </div>
                 
                 <div className="flex justify-end mb-6">
