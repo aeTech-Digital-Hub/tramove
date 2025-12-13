@@ -15,19 +15,44 @@ type heroProps = {
 
 const Hero = ({title, text, small}: heroProps) => {
 
-  const images = [assets.aboutheroimage, assets.heroImage, assets.heroimage1];
+  const HERO_IMAGES = [
+    assets.aboutheroimage,
+    assets.heroImage,
+    assets.heroimage1,
+  ];
+  
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    // Preload images
+    HERO_IMAGES.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  
+    // Rotate background
     const intervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
     }, 5000);
+  
     return () => clearInterval(intervalId);
-  }, [images.length]);
+  }, []);
 
 
   return (
-    <div className={`flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white bg-no-repeat bg-cover bg-center h-screen relative`} style={{backgroundImage: `url(${images[currentImageIndex]})`,}}>
+    <div
+    className="relative h-screen flex flex-col items-start justify-center 
+               px-6 md:px-16 lg:px-24 xl:px-32 text-white overflow-hidden"
+  >
+    {/* Background layers */}
+    {HERO_IMAGES.map((image, index) => (
+      <div
+        key={image}
+        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000
+          ${index === currentImageIndex ? "opacity-100" : "opacity-0"}`}
+        style={{ backgroundImage: `url(${image})` }}
+      />
+    ))}
       <div className='bg-black/80 absolute top-0 left-0 bottom-0 right-0 h-screen'></div>
       <div className="flex items-center z-10">
         <div className='lg:flex flex-col items-start'>

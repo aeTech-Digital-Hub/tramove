@@ -14,11 +14,12 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ['react', 'react-dom'],
-          router: ['react-router-dom'],
+          react: ["react", "react-dom"],
+          router: ["react-router-dom"],
+          ui: ["react-icons"],
         },
       },
     },
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 700,
   }
 })
