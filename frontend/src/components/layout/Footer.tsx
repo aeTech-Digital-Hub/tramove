@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom'
 import { FaMapMarkerAlt, FaPhone, FaInstagram, FaTwitter, FaFacebookF, FaLinkedinIn } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
-import logo from '../../assets/logo.svg'
+import logo from '../../assets/logo.webp'
 
 const Footer = () => {
   return (
