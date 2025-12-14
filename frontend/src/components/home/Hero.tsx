@@ -1,7 +1,7 @@
 // import React from 'react'
 import assets from '@/assets/assets';
 import Button from '../Button';
-import premuim from '@/assets/fluent_premium-20-regular.png';
+import premuim from '@/assets/premium.webp';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 

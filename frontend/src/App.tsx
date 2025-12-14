@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "./pages/About";
-//import Services from "./pages/Services";
+import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import Index from "./pages/Index";
 import Navbar from "./components/layout/Navbar";
@@ -22,10 +22,6 @@ import ShipperLogin from "./pages/auth/ShipperLogin";
 import AdminLogin from "./pages/auth/AdminLogin";
 import Logout from "./pages/auth/LogOut";
 import { ToastContainer } from 'react-toastify';
-
-import { lazy, Suspense } from "react";
-
-const Services = lazy(() => import("@/pages/Services"));
 
 
 
@@ -65,13 +61,10 @@ const App = () => {
             {/* Public routes with Navbar and Footer */}
             <Route path="/" element={<><Navbar /><Index /><Footer /></>} />
             <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
-           
+            <Route path="/services" element={<><Navbar /><Services /><Footer /></>} />
             <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />      
             <Route path="/get-a-quote" element={<><Navbar /><Quote /><Footer /></>} />      
             <Route path="/get-started" element={<><Navbar /><GetStarted /><Footer /></>} /> 
-            <Suspense fallback={<div>Loading...</div>}>
-              <Route path="/services" element={<><Navbar /><Services /><Footer /></>} />
-            </Suspense>
 
 
             {/* Auth Pages */}
