@@ -9,20 +9,20 @@ const About = lazy(() =>import("./pages/About"));
 const Services = lazy(() => import ("./pages/Services"));
 import NotFound from "./pages/NotFound";
 const Index = lazy(() => import( "./pages/Index"))
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
-import ShipperDashboardPage from "./pages/dashboard/shipper/Dashboard";
-import AdminDashboardPage from "./pages/dashboard/admin/Dashboard";
-import TransporterDashboardPage from "./pages/dashboard/transporter/Dashboard";
+const Navbar = lazy(() => import("./components/layout/Navbar"));
+const Footer = lazy (() => import ( "./components/layout/Footer"));
+const ShipperDashboardPage = lazy (() => import ( "./pages/dashboard/shipper/Dashboard"));
+const  AdminDashboardPage = lazy(() =>  import("./pages/dashboard/admin/Dashboard"));
+const TransporterDashboardPage = lazy(() => import( "./pages/dashboard/transporter/Dashboard"));
 const Contact = lazy(() => import ("./pages/Contact"));
 const Quote = lazy (() => import ("./pages/Quote"));
 const GetStarted = lazy(() => import("./pages/GetStarted"));
-import ShipperRegistration from "./pages/auth/ShipperRegistration";
-import TransporterRegistration from "./pages/auth/TransporterRegistration";
-import TransporterLogin from "./pages/auth/TransporterLogin";
-import ShipperLogin from "./pages/auth/ShipperLogin";
-import AdminLogin from "./pages/auth/AdminLogin";
-import Logout from "./pages/auth/LogOut";
+const ShipperRegistration = lazy(() =>import( "./pages/auth/ShipperRegistration"));
+const TransporterRegistration = lazy(() => import ( "./pages/auth/TransporterRegistration"));
+const TransporterLogin = lazy(() => import ( "./pages/auth/TransporterLogin"));
+const ShipperLogin = lazy(() => import ("./pages/auth/ShipperLogin"));
+const AdminLogin = lazy(() => import ("./pages/auth/AdminLogin"));
+const Logout = lazy(() => import ( "./pages/auth/LogOut"));
 import { ToastContainer } from 'react-toastify';
 
 
