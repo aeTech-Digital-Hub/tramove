@@ -1,20 +1,22 @@
+import { lazy, Suspense } from "react";
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import About from "./pages/About";
-import Services from "./pages/Services";
+const About = lazy(() =>import("./pages/About"));
+const Services = lazy(() => import ("./pages/Services"));
 import NotFound from "./pages/NotFound";
-import Index from "./pages/Index";
+const Index = lazy(() => import( "./pages/Index"))
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ShipperDashboardPage from "./pages/dashboard/shipper/Dashboard";
 import AdminDashboardPage from "./pages/dashboard/admin/Dashboard";
 import TransporterDashboardPage from "./pages/dashboard/transporter/Dashboard";
-import Contact from "./pages/Contact";
-import Quote from "./pages/Quote";
-import GetStarted from "./pages/GetStarted";
+const Contact = lazy(() => import ("./pages/Contact"));
+const Quote = lazy (() => import ("./pages/Quote"));
+const GetStarted = lazy(() => import("./pages/GetStarted"));
 import ShipperRegistration from "./pages/auth/ShipperRegistration";
 import TransporterRegistration from "./pages/auth/TransporterRegistration";
 import TransporterLogin from "./pages/auth/TransporterLogin";
@@ -57,9 +59,10 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <Suspense fallback={<div>....loading</div>}>
           <Routes>
             {/* Public routes with Navbar and Footer */}
-            <Route path="/" element={<><Navbar /><Index /><Footer /></>} />
+              <Route path="/" element={<><Navbar /><Index /><Footer /></>} />
             <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
             <Route path="/services" element={<><Navbar /><Services /><Footer /></>} />
             <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />      
@@ -90,6 +93,7 @@ const App = () => {
             {/* Catch-all route */}
             <Route path="*" element={<><Navbar /><NotFound /><Footer /></>} />
           </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
