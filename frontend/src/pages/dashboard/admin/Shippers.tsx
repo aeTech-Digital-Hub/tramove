@@ -1,17 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import { IoMdClose } from 'react-icons/io'
 import { FaStar } from 'react-icons/fa'
+import axios from 'axios';
 
 // Define shipper interface
 interface Shipper {
-  id: string;
+  _id: string;
   name: string;
-  route: string;
-  vehicleType: string;
+  company: string;
+  address: string;
   rating: number;
   shipments: number;
   status: 'active' | 'inactive';
+  industry: string
+  email: string
+  phone: string
 }
 
 interface NewShipperForm {
@@ -27,7 +31,7 @@ const Shippers = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-  const [selectedShipper, _setSelectedShipper] = useState<Shipper | null>(null);
+  const [selectedShipper] = useState<Shipper | null>(null);
   const [newShipperForm, setNewShipperForm] = useState<NewShipperForm>({
     name: '',
     email: '',
@@ -36,42 +40,29 @@ const Shippers = () => {
     route: '',
     vehicleType: ''
   });
+  const [shippers, setShippers] = useState<Shipper[]>([])
   
   // const handleViewProfile = (shipper: Shipper) => {
   //   setSelectedShipper(shipper);
   //   setIsProfileModalOpen(true);
   // };
   
-  // Sample data for activeShippers
-  const [activeShippers] = useState<Shipper[]>([
-    {
-      id: "SH001",
-      name: "John Doe",
-      route: "Lagos - Abuja",
-      vehicleType: "Truck",
-      rating: 4.8,
-      shipments: 24,
-      status: "active"
-    },
-    {
-      id: "SH002",
-      name: "Jane Smith",
-      route: "Ibadan - Kano",
-      vehicleType: "Van",
-      rating: 4.5,
-      shipments: 18,
-      status: "active"
-    },
-    {
-      id: "SH003",
-      name: "Robert Johnson",
-      route: "Port Harcourt - Kaduna",
-      vehicleType: "Truck",
-      rating: 4.9,
-      shipments: 32,
-      status: "active"
-    }
-  ]);
+
+
+  const token = localStorage.getItem('token')
+
+  const shipers = async() => {
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/shipper/get-shipper`, {headers: {Authorization: `Bearer ${token}`}})
+    console.log(response);
+    setShippers(response.data.data)
+    console.log(response.data.data);
+    
+    
+  }
+
+  useEffect(() => {
+    shipers()
+  },[])
 
   return (
     <div className='space-y-5'>
@@ -80,36 +71,36 @@ const Shippers = () => {
           <h1 className="text-2xl font-bold w-[400px]">Shippers</h1>
           <p>Manage registered shippers and their details.</p>
         </div>
-        <div className="">
+        {/* <div className="">
           <button
             className="px-4 py-2 text-white bg-gradient-to-t from-red to-deep-red rounded-full hover:bg-[#E60023]/90"
             onClick={() => setIsAddModalOpen(true)}
           >
             Add Shippers
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className='grid grid-cols-4 gap-4 w-full'>
         <div className='bg-white rounded-lg shadow-sm p-6 w-60 flex flex-col gap-2 items-center'>
           <h3 className='text-sm font-semibold'>Total Shippers</h3>
-          <p className='text-2xl font-bold'>8</p>
+          <p className='text-2xl font-bold'>{shippers.length}</p>
+          <p className='text-sm text-gray-500'>this quarter</p>
+        </div>
+        <div className='bg-white rounded-lg shadow-sm p-6 w-60 flex flex-col gap-2 items-center'>
+          <h3 className='text-sm font-semibold'>Total Shippers</h3>
+          <p className='text-2xl font-bold'>{shippers.length}</p>
+          <p className='text-sm text-gray-500'>this half</p>
+        </div>
+        <div className='bg-white rounded-lg shadow-sm p-6 w-60 flex flex-col gap-2 items-center'>
+          <h3 className='text-sm font-semibold'>Total Shippers</h3>
+          <p className='text-2xl font-bold'>{shippers.length}</p>
           <p className='text-sm text-gray-500'>+8 this quarter</p>
         </div>
         <div className='bg-white rounded-lg shadow-sm p-6 w-60 flex flex-col gap-2 items-center'>
           <h3 className='text-sm font-semibold'>Total Shippers</h3>
-          <p className='text-2xl font-bold'>8</p>
-          <p className='text-sm text-gray-500'>+8 this quarter</p>
-        </div>
-        <div className='bg-white rounded-lg shadow-sm p-6 w-60 flex flex-col gap-2 items-center'>
-          <h3 className='text-sm font-semibold'>Total Shippers</h3>
-          <p className='text-2xl font-bold'>8</p>
-          <p className='text-sm text-gray-500'>+8 this quarter</p>
-        </div>
-        <div className='bg-white rounded-lg shadow-sm p-6 w-60 flex flex-col gap-2 items-center'>
-          <h3 className='text-sm font-semibold'>Total Shippers</h3>
-          <p className='text-2xl font-bold'>8</p>
-          <p className='text-sm text-gray-500'>+8 this quarter</p>
+          <p className='text-2xl font-bold'>{shippers.length}</p>
+          <p className='text-sm text-gray-500'>+28 this year</p>
         </div>
       </div>
 
@@ -154,21 +145,21 @@ const Shippers = () => {
                 <tr className="bg-gray-50 text-left text-gray-600 text-sm">
                   <th className="py-3 px-4">ID</th>
                   <th className="py-3 px-4">Name</th>
-                  <th className="py-3 px-4">Route</th>
-                  <th className="py-3 px-4">Vehicle</th>
+                  <th className="py-3 px-4">Company</th>
+                  <th className="py-3 px-4">Industry</th>
                   <th className="py-3 px-4">Rating</th>
                   <th className="py-3 px-4">Shipment</th>
-                  <th className="py-3 px-4">Status</th>
+                  <th className="py-3 px-4">Phone</th>
                   <th className="py-3 px-4">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {activeShippers.map((shipper, index) => (
-                  <tr key={`reg-${shipper.id}-${index}`} className="border-t text-sm">
-                    <td className="py-4 px-4">{shipper.id}</td>
+                {shippers.map((shipper, index) => (
+                  <tr key={`reg-${shipper._id}-${index}`} className="border-t text-sm">
+                    <td className="py-4 px-4">{shipper._id}</td>
                     <td className="py-4 px-4">{shipper.name}</td>
-                    <td className="py-4 px-4">{shipper.route}</td>
-                    <td className="py-4 px-4">{shipper.vehicleType}</td>
+                    <td className="py-4 px-4">{shipper.company}</td>
+                    <td className="py-4 px-4">{shipper.industry}</td>
                     <td className="py-4 px-4">
                       <div className="flex items-center">
                         <span className="text-yellow-400 mr-1">★</span>
@@ -178,11 +169,11 @@ const Shippers = () => {
                     <td className="py-4 px-4">{shipper.shipments}</td>
                     <td className="py-4 px-4">
                       <span className={`px-2 py-1 ${
-                        shipper.status === 'active' 
+                        shipper.email 
                           ? 'bg-green-100 text-green-800' 
                           : 'bg-gray-100 text-gray-800'
                       } rounded-full text-xs`}>
-                        {shipper.status === 'active' ? 'Active' : 'Inactive'}
+                        {shipper.phone}
                       </span>
                     </td>
                     <td className="py-4 px-4">
@@ -380,7 +371,7 @@ const Shippers = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-gray-500">ID</p>
-                    <p className="font-medium">{selectedShipper.id}</p>
+                    <p className="font-medium">{selectedShipper._id}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Status</p>
@@ -393,12 +384,12 @@ const Shippers = () => {
                     </span>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Vehicle Type</p>
-                    <p className="font-medium">{selectedShipper.vehicleType}</p>
+                    <p className="text-sm text-gray-500">Company</p>
+                    <p className="font-medium">{selectedShipper.company}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Preferred Route</p>
-                    <p className="font-medium">{selectedShipper.route}</p>
+                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="font-medium">{selectedShipper.phone}</p>
                   </div>
                 </div>
               </div>

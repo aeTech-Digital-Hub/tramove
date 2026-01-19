@@ -109,7 +109,7 @@ const ActiveShipments: React.FC = () => {
       </div>
       
       <div className="text-center mt-3">
-      <Link to={'/shipments'}>
+      <Link to={'/dashboard/shipper/shipments'}>
         <button className="text-red text-xs flex items-center text-center">
           See all
         </button>

@@ -24,6 +24,7 @@ const ShipperLogin = lazy(() => import ("./pages/auth/ShipperLogin"));
 const AdminLogin = lazy(() => import ("./pages/auth/AdminLogin"));
 const Logout = lazy(() => import ( "./pages/auth/LogOut"));
 import { ToastContainer } from 'react-toastify';
+import AdminRegister from "./pages/auth/AdminRegister";
 
 
 
@@ -77,6 +78,7 @@ const App = () => {
             <Route path="/transporter-login" element={<><Navbar /><TransporterLogin /><Footer /></>} /> 
             <Route path="/auth/logout" element={<Logout />} />
             <Route path="/auth/admin-login" element={<><Navbar /><AdminLogin /><Footer /></>} />
+            <Route path="/auth/admin-register" element={<><Navbar /><AdminRegister /><Footer /></>} />
 
             {/* Admin Dashboard Routes */}
             <Route path="/dashboard/admin/*" element={<AdminDashboardPage />} />

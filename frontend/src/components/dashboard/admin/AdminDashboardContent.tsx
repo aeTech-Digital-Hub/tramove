@@ -3,7 +3,8 @@ import StatsCard from '../shipper/StatsCard';
 import AssignTransporterModal from './AssignTransporterModal';
 import SuccessModal from './SuccessModal';
 import AdjustQuoteModal from './AdjustQuoteModal';
-import PendingShipmentsTable, { type PendingShipment } from '../shared/PendingShipmentsTable';
+import PendingShipmentsTable from '../shared/PendingShipmentsTable';
+import axios from 'axios';
 
 // Mock data structure
 interface TransporterApplication {
@@ -19,32 +20,15 @@ interface TransporterApplication {
   capacity?: string;
 }
 
-// interface TransporterApplication {
-//   id: string;
-//   name: string;
-//   vehicleType: string;
-//   capacity: string;
-//   location: string;
-// }
+type Quote = {
+  _id: string;
+  amount?: string | number;
+  status?: string;
+  weight?: number;
+  dimensions?: string;
+  origin?: string;
+};
 
-const MOCK_SHIPMENTS: PendingShipment[] = [
-  {
-    id: 'SH-7852',
-    shipper: 'Adam Logistics',
-    cargoType: 'Electronics',
-    route: 'Accra to Tamale',
-    eta: '2023-05-20',
-    quote: 1500
-  },
-  {
-    id: 'SH-7852',
-    shipper: 'Adam Logistics',
-    cargoType: 'Machine',
-    route: 'Accra to Tamale',
-    eta: '2023-05-20',
-    quote: 3000
-  }
-];
 
 const TRANSPORTER_APPLICATION: TransporterApplication[] = [
   {
@@ -73,23 +57,7 @@ const AdminDashboardContent: React.FC = () => {
   const [selectedShipment, setSelectedShipment] = useState<PendingShipment | null>(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
-
-  // Simulate API fetch
-  useEffect(() => {
-    const fetchPendingShipments = async () => {
-      try {
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setPendingShipments(MOCK_SHIPMENTS);
-      } catch (error) {
-        console.error('Error fetching pending shipments:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchPendingShipments();
-  }, []);
+  const [shipments, setShipments] = useState<PendingShipment[]>([]);
 
   const fetchTransporterApplications = async () => {
     try {
@@ -109,7 +77,7 @@ const AdminDashboardContent: React.FC = () => {
 
   const handleAdjustQuote = async (shipmentId: string) => {
     // Find the shipment in the pending shipments array
-    const shipment = pendingShipments.find(s => s.id === shipmentId);
+    const shipment = pendingShipments.find(s => s._id === shipmentId);
     
     if (shipment) {
       setSelectedShipment(shipment);
@@ -140,6 +108,38 @@ const AdminDashboardContent: React.FC = () => {
     setSuccessMessage('');
   };
 
+
+  //const admin = JSON.parse(localStorage.getItem('admin')!)
+  const token = localStorage.getItem('token')
+
+
+  //fetching shipments from the backend
+  const fetchShipments = async () => {
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/quote/get-quote`, {headers: { Authorization: `Bearer ${token}`}})
+    console.log(response);
+    setShipments(response.data)
+  }
+
+  const calculateTotalAmount = (orders: Quote[]): number => {
+    return orders.reduce((total, order) => {
+      const amount = Number(order.amount) || 0;
+      return total + amount;
+    }, 0);
+  };
+
+  const totalAmount = calculateTotalAmount(shipments);
+
+  const pendingCount = shipments.filter(
+    shipment => shipment.status === 'pending'
+  ).length;
+  
+
+
+
+  useEffect(() => {
+    fetchShipments()
+  }, [])
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -163,33 +163,33 @@ const AdminDashboardContent: React.FC = () => {
         icon='package'
         bgColor='bg-green-300'
           label="Pending Shipments"
-          value="62"
+          value={pendingCount}
         />
         <StatsCard
         textColor='text-deep-red'
           bgColor='bg-red/40'
           icon='check'
           label="Active Shipments"
-          value="2,567"
+          value={shipments.length}
         />
         <StatsCard
         textColor='text-blue-700'
         icon='package'
             bgColor='bg-blue-300'
           label="Pending Transporters"
-          value="18"
+          value={0}
         />
         <StatsCard
         textColor='text-yellow-700'
         icon='dollar'
           bgColor='bg-yellow-300'
           label="Total Revenue"
-          value="₵24.8K"
+          value={ totalAmount}
         />
       </div>
       
       <PendingShipmentsTable
-        shipments={pendingShipments}
+        shipments={shipments}
         isLoading={isLoading}
         onAdjustQuote={handleAdjustQuote}
         onAssignTransporter={handleAssignTransporter}
@@ -294,7 +294,7 @@ const AdminDashboardContent: React.FC = () => {
             // Update the shipment in the list with the new quote
             setPendingShipments(prevShipments => 
               prevShipments.map(shipment => 
-                shipment.id === selectedShipment.id 
+                shipment._id === selectedShipment._id 
                   ? {...shipment, quote: newQuote} 
                   : shipment
               )

@@ -6,11 +6,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-type heroProps = {
-  small: string, 
-  title: string,
-  text: string
-}
+
 
 
 const Hero = ({title, text, small}: heroProps) => {
@@ -62,7 +58,7 @@ const Hero = ({title, text, small}: heroProps) => {
           </div>
           <div className='flex flex-col items-start mt-8'>
             <div className='p-2 m-1'>
-              <h1 className='lg:text-6xl text-3xl font-bold lg:w-[70%] text-red/50'>
+              <h1 className='lg:text-6xl text-3xl font-bold lg:w-[70%] text-red'>
                 {title}
               </h1>
             </div>

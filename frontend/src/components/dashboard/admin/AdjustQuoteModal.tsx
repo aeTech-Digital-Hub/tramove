@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { FiX } from 'react-icons/fi';
-import type { PendingShipment } from '@/components/dashboard/shared/PendingShipmentsTable';
 
 interface AdjustQuoteModalProps {
   isOpen: boolean;
@@ -15,7 +14,7 @@ const AdjustQuoteModal: React.FC<AdjustQuoteModalProps> = ({
   onSaveQuote,
   shipment
 }) => {
-  const shipmentId = shipment.id;
+  const shipmentId = shipment._id;
   const currentQuote = shipment.quote;
   
   // Calculate the base quote (approx 93% of total)

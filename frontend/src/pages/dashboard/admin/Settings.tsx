@@ -4,8 +4,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { useEffect } from "react";
+import axios from "axios";
 
 const SettingsPage = () => {
+  //const [admin, setAdmin] = useState()
+
+  const token = localStorage.getItem('token')
+
+  const updateAdmin = async () => {
+    const response = await axios.patch(`${import.meta.env.VITE_API_URL}/admin/update`, {headers: {Authorization: ` Bearer ${token}`}})
+    console.log(response);
+    
+  }
+
+
+  useEffect(() => {
+    updateAdmin()
+  }, [])
+
+
   return (
     <div className="space-y-6">
       {/* Profile Settings */}

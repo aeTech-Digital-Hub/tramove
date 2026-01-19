@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom';
 
 
 
@@ -54,6 +55,7 @@ const Quote : React.FC = () => {
     try {
       const token = localStorage.getItem('token')
 
+      
       if(!token){
         toast.error('Please Register or Login to create a quote')
         navigate('/shipper-login')
@@ -61,6 +63,7 @@ const Quote : React.FC = () => {
       
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/quote/create-quote/${shipper._id}`,  quoteData, {headers: { Authorization: `Bearer ${token}`}})
       console.log(response);
+    
       
 
       if(response.statusText === 'OK'){
@@ -110,7 +113,7 @@ const Quote : React.FC = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
-              <label className="block font-medium mb-2">Weight (kg)</label>
+              <label className="block font-medium mb-2">Type of track</label>
               <input 
                 type="Number" 
                 value={quoteData.weight}
@@ -165,7 +168,7 @@ const Quote : React.FC = () => {
             <label className="block font-medium mb-2">Email Address</label>
             <input type="email" name='email' value={quoteData.email} onChange={handleQuoteChange} placeholder="Your email address" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-200" />
           </div>
-          {<button type="submit" className="w-full py-2 rounded-full bg-gradient-to-r from-red to-deep-red text-white font-semibold text-base shadow-md hover:from-red hover:to-deep-red transition-all">calculate quote</button>}
+          {quote?<button type="submit" className="w-full py-2 rounded-full bg-gradient-to-r from-red to-deep-red text-white font-semibold text-base shadow-md hover:from-red hover:to-deep-red transition-all">calculate quote</button>:''}
         </form>
         {/* Estimated Quote Card UI - only show after calculation */}
         {showQuote && (
@@ -195,6 +198,11 @@ const Quote : React.FC = () => {
               </div>
               
             </div>
+            {
+              <Link to={'/dashboard/shipper/'}>
+              <button type="submit" className="w-full py-2 rounded-full bg-gradient-to-r from-red to-deep-red text-white font-semibold text-base shadow-md hover:from-red hover:to-deep-red transition-all">procedd to dashboard</button>
+              </Link>
+              }
           </div>
         )}
       </div>

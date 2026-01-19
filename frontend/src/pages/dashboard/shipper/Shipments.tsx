@@ -87,7 +87,7 @@ const ShipmentsPage: React.FC = () => {
       </div>
       
       <div className="space-y-3">
-        {shipments.map((shipment, index) => {
+        {shipments.slice(0, 10).map((shipment, index) => {
           const { borderColor, displayText, bgColor, textColor } = getStatusInfo(shipment.status);
           return (
             <div 
@@ -128,8 +128,8 @@ const ShipmentsPage: React.FC = () => {
       </div>
       
       <div className="text-center mt-3">
-        <button className="text-red text-xs flex items-center text-center">
-          See all
+        <button onClick={() => setShipments} className="text-red text-xs flex items-center text-center">
+          Show all
         </button>
       </div>
     </div>

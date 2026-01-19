@@ -1,20 +1,18 @@
 
 import { useState, useEffect } from 'react';
-import PendingShipmentsTable, { type PendingShipment } from '@/components/dashboard/shared/PendingShipmentsTable';
+import PendingShipmentsTable from '@/components/dashboard/shared/PendingShipmentsTable';
 import AssignTransporterModal from '@/components/dashboard/admin/AssignTransporterModal';
 import CreateShipmentModal from '@/components/dashboard/admin/CreateShipmentModal';
 import AdjustQuoteModal from '@/components/dashboard/admin/AdjustQuoteModal';
 import { FiDownload, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import axios from 'axios';
 
-// Interface for shipment history
-interface ShipmentHistory {
-  id: string;
-  transporter: string;
-  route: string;
-  date: string;
-  value: number;
-  status: 'Delivered' | 'In Transit' | 'Pending' | 'Cancelled';
-}
+
+
+
+
+
+
 
 const Shipments = () => {
   const [pendingShipments, setPendingShipments] = useState<PendingShipment[]>([]);
@@ -30,43 +28,23 @@ const Shipments = () => {
   const [statusFilter, setStatusFilter] = useState('All');
   const [searchId, setSearchId] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [shipments, setShipments] = useState<PendingShipment[]>([])
 
-  // Simulate API fetch for pending shipments
-  useEffect(() => {
-    const fetchPendingShipments = async () => {
-      try {
-        // Mock data for pending shipments
-        const MOCK_SHIPMENTS: PendingShipment[] = [
-          {
-            id: 'SH-7852',
-            shipper: 'Adam Logistics',
-            cargoType: 'Electronics',
-            route: 'Accra to Tamale',
-            eta: '2023-05-20',
-            quote: 1500
-          },
-          {
-            id: 'SH-7852',
-            shipper: 'Adam Logistics',
-            cargoType: 'Machine',
-            route: 'Accra to Tamale',
-            eta: '2023-05-20',
-            quote: 3000
-          }
-        ];
-        
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setPendingShipments(MOCK_SHIPMENTS);
-      } catch (error) {
-        console.error('Error fetching pending shipments:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
 
-    fetchPendingShipments();
-  }, []);
+  shipments.map((quote) => ({
+    id: quote._id,
+    quote,
+    weight: quote.weight,
+    route: `${quote.origin} to ${quote.destination}`,
+    status:
+      quote.status === "pending"
+        ? "pending"
+        : quote.status === "In Transit"
+          ? "Processing"
+        : quote.status === "delivered"
+        ? "Delivered"
+        : "cancelled",
+  }));
 
   // Simulate API fetch for shipment history
   useEffect(() => {
@@ -80,7 +58,7 @@ const Shipments = () => {
             route: 'Accra to Takoradi',
             date: '2025-05-08',
             value: 2500,
-            status: 'Delivered'
+            status: 'delivered'
           },
           {
             id: 'SH-40135',
@@ -88,7 +66,7 @@ const Shipments = () => {
             route: 'Kumasi to Accra',
             date: '2025-05-08',
             value: 3800,
-            status: 'Delivered'
+            status: 'delivered'
           },
           {
             id: 'SH-27135',
@@ -107,6 +85,7 @@ const Shipments = () => {
         console.error('Error fetching shipment history:', error);
       } finally {
         setIsHistoryLoading(false);
+        setIsLoading(false)
       }
     };
 
@@ -115,7 +94,7 @@ const Shipments = () => {
 
   const handleAdjustQuote = async (shipmentId: string) => {
     // Find the shipment in the pending shipments array
-    const shipment = pendingShipments.find(s => s.id === shipmentId);
+    const shipment = pendingShipments.find(s => s._id === shipmentId);
     
     if (shipment) {
       setSelectedShipment(shipment);
@@ -138,13 +117,28 @@ const Shipments = () => {
     console.log('Exporting shipment data');
     // Add export logic here
   };
+
+   //const admin = JSON.parse(localStorage.getItem('admin')!)
+    const token = localStorage.getItem('token')
+  
+  
+    //fetching shipments from the backend
+    const fetchShipments = async () => {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/quote/get-quote`, {headers: { Authorization: `Bearer ${token}`}})
+      console.log(response);
+      setShipments(response.data)
+    }
+
+    useEffect(() => {
+      fetchShipments()
+    }, [])
   
   const handleCreateShipment = (shipmentData: {
     origin: string;
     destination: string;
     transporter: string;
     shipmentType: string;
-    weight: string;
+    weight?: string | number;
     value: string;
     shipmentDate: string;
     note: string;
@@ -156,11 +150,10 @@ const Shipments = () => {
     
     // Create a new pending shipment from the data
     const newPendingShipment: PendingShipment = {
-      id: newShipmentId,
-      shipper: 'Adam Logistics', // Default shipper or get from context
-      cargoType: shipmentData.shipmentType,
+      _id: newShipmentId,
+      name: 'Adam Logistics', // Default shipper or get from context
+      weight: Number(shipmentData.shipmentType),
       route: `${shipmentData.origin} to ${shipmentData.destination}`,
-      eta: shipmentData.shipmentDate,
       quote: parseFloat(shipmentData.value.replace(/,/g, ''))
     };
     
@@ -191,7 +184,7 @@ const Shipments = () => {
       {/* Pending Shipments Table - Matches the top section of the image */}
       <div className="border border-dotted border-blue-300 rounded-lg">
         <PendingShipmentsTable
-          shipments={pendingShipments}
+          shipments={shipments}
           isLoading={isLoading}
           onAdjustQuote={handleAdjustQuote}
           onAssignTransporter={handleAssignTransporter}
@@ -286,19 +279,19 @@ const Shipments = () => {
                   </td>
                 </tr>
               ) : (
-                shipmentHistory.map((shipment) => (
-                  <tr key={shipment.id} className="border-b text-sm">
-                    <td className="py-4 px-4">{shipment.id}</td>
-                    <td className="py-4 px-4">{shipment.transporter}</td>
-                    <td className="py-4 px-4">{shipment.route}</td>
-                    <td className="py-4 px-4">{shipment.date}</td>
-                    <td className="py-4 px-4">₵{shipment.value.toLocaleString()}</td>
+                shipments.map((shipment) => (
+                  <tr key={shipment._id} className="border-b text-sm">
+                    <td className="py-4 px-4">{shipment._id}</td>
+                    <td className="py-4 px-4">{shipment.name}</td>
+                    <td className="py-4 px-4">{shipment.origin}</td>
+                    <td className="py-4 px-4">{shipment.dimensions}</td>
+                    <td className="py-4 px-4">₵{shipment.amount}</td>
                     <td className="py-4 px-4">
                       <span 
                         className={`px-2 py-1 rounded-md text-xs ${
-                          shipment.status === 'Delivered' ? 'bg-green-100 text-green-800' : 
+                          shipment.status === 'delivered' ? 'bg-green-100 text-green-800' : 
                           shipment.status === 'In Transit' ? 'bg-blue-100 text-blue-800' :
-                          shipment.status === 'Cancelled' ? 'bg-red-100 text-red-800' : 
+                          shipment.status === 'cancelled' ? 'bg-red-100 text-red-800' : 
                           'bg-yellow-100 text-yellow-800'
                         }`}
                       >
@@ -307,7 +300,7 @@ const Shipments = () => {
                     </td>
                     <td className="py-4 px-4">
                       <button 
-                        onClick={() => handleViewDetails(shipment.id)}
+                        onClick={() => handleViewDetails(shipment._id)}
                         className="text-red hover:text-deep-red border border-red rounded-full px-4"
                       >
                         View
@@ -371,7 +364,7 @@ const Shipments = () => {
             // Update the shipment in the list with the new quote
             setPendingShipments(prevShipments => 
               prevShipments.map(shipment => 
-                shipment.id === selectedShipment.id 
+                shipment._id === selectedShipment._id 
                   ? {...shipment, quote: newQuote} 
                   : shipment
               )

@@ -7,6 +7,8 @@ interface StatsCardProps {
   label: string;
   bgColor: string;
   textColor: string;
+  status?: string;
+  amount?: number
 }
 
 const StatsCard: React.FC<StatsCardProps> = ({ icon, value, label, bgColor, textColor }) => {

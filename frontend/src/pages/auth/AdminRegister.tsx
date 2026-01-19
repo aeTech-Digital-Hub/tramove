@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-const AdminLogin: React.FC = () => {
+const AdminRegister: React.FC = () => {
   // Navigation hook
   const navigate = useNavigate()
   
@@ -12,6 +12,8 @@ const AdminLogin: React.FC = () => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
+    name: '',
+    phone: ''
   })
   const [isLoading, setIsLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState('');
@@ -27,22 +29,18 @@ const AdminLogin: React.FC = () => {
   
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/admin/login`, userData
+        `${import.meta.env.VITE_API_URL}/admin/register`, userData
       );
   
       console.log(response);
   
-      if (response.data.success) {
-        const {token, admin} = response.data
-        // Save token
-        localStorage.setItem("token", token);
-
-        localStorage.setItem("admin", JSON.stringify(admin));
-  
-        // Navigate to shipper dashboard
-        navigate("/dashboard/admin/");
+      if (response.status === 200 || response.status === 201) {
+        // Navigate to admin login
+        navigate("/auth/admin-login");
         toast('Login Successfully')
       }
+  
+        
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         setErrorMsg(err.response?.data?.message ?? "Unexpected error");
@@ -76,20 +74,44 @@ const AdminLogin: React.FC = () => {
             <img src={assets.packageicon} alt="Shipper" className="w-12 h-12" />
           </div>
           
-          <h1 className="text-2xl font-bold text-center mb-1">Admin Login</h1>
+          <h1 className="text-2xl font-bold text-center mb-1">Admin Register</h1>
           <p className="text-gray-600 text-center mb-6">
-            Access your admin account with your admin details
+            Register to access your account
           </p>
           
           <form onSubmit={handleSubmit}>
           {errorMsg && <p className="text-red-600 text-sm mb-4">{errorMsg}</p>}
 
             <div className="mb-4">
+              <label className="block mb-1 font-medium">Name</label>
+              <input 
+                type="name"
+                name='name'
+                value={userData.name}
+                onChange={changeInputHandler}
+                placeholder="Enter your name"
+                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                required
+              />
+            </div>
+            <div className="mb-4">
               <label className="block mb-1 font-medium">Email Address</label>
               <input 
                 type="email"
                 name='email'
                 value={userData.email}
+                onChange={changeInputHandler}
+                placeholder="Enter your email address"
+                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block mb-1 font-medium">Phone</label>
+              <input 
+                type="text"
+                name='phone'
+                value={userData.phone}
                 onChange={changeInputHandler}
                 placeholder="Enter your email address"
                 className="w-full border border-gray-300 rounded-md px-3 py-2"
@@ -125,7 +147,7 @@ const AdminLogin: React.FC = () => {
 </button>
 
             <div className="mt-4 text-center">
-              Don't have an account? <Link to="/auth/admin-register" className="text-red hover:underline font-medium">Sign Up</Link>
+              Don't have an account? <Link to="/auth/admin-login" className="text-red hover:underline font-medium">Sign Up</Link>
             </div>
           </form>
         </div>
@@ -134,4 +156,4 @@ const AdminLogin: React.FC = () => {
   )
 }
 
-export default AdminLogin
+export default AdminRegister

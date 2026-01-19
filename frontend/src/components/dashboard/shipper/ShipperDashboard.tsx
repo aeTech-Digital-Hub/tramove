@@ -1,25 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import StatsCard from './StatsCard';
-import SpecialOffer from './SpecialOffer';
 import ActiveShipments from './ActiveShipments';
-import StatusDistribution from './StatusDistribution';
 import PendingBids from './PendingBids';
 import axios from 'axios';
 // import useAuthStore from '@/store/useAuthStore';
 // import useShipmentStore from '@/store/useShipmentStore';
 // import useBidStore from '@/store/useBidStore';
 
-interface ShipperDashboardProps {
-  user: {
-    name: string;
-    company?: string;
-  };
+
+interface Shipment {
+  _id: string;
+  origin: string;
+  destination: string;
+  status: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  createdAt?: string;
+  amount?: string
 }
 
-const ShipperDashboard: React.FC<ShipperDashboardProps> = ({ user }) => {
+interface Company {
+  name?: string
+}
+
+const ShipperDashboard: React.FC<Company> = () => {
   // const { shipments, setShipments, loading: shipmentsLoading } = useShipmentStore();
   // const { bids, setBids, loading: bidsLoading } = useBidStore();
-  const [shipments, setShipments] = useState([])
+  const [shipments, setShipments] = useState<Shipment[]>([])
+  const [company, setCompany] = useState<Company>({})
   const shipper = JSON.parse(localStorage.getItem('shipper')!)
   useEffect(() => {
      const token = localStorage.getItem('token')
@@ -27,8 +36,14 @@ const ShipperDashboard: React.FC<ShipperDashboardProps> = ({ user }) => {
        try {
          const response = await axios.get(`${import.meta.env.VITE_API_URL}/shipper/${shipper._id}/quotes`, {headers: { Authorization: `Bearer ${token}`}})
          console.log(response);
+
          console.log(response.data.shipments);
+         console.log(response.data);
+         
          setShipments(response.data.shipments)
+         setCompany(response.data)
+
+
        } catch (error) {
          console.log(error);
          
@@ -41,7 +56,8 @@ const ShipperDashboard: React.FC<ShipperDashboardProps> = ({ user }) => {
   return (
     <div className="container mx-auto p-4">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold">Welcome, {user.name}!</h1>
+        
+        <h1 className="text-2xl font-bold">Welcome, {company.name}!</h1>
         <p className="text-gray-600">Manage your shipments and track your order with ease.</p>
       </div>
 
@@ -76,11 +92,11 @@ const ShipperDashboard: React.FC<ShipperDashboardProps> = ({ user }) => {
         />
       </div>
 
-      <SpecialOffer />
+      {/* <SpecialOffer /> */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 gap-6 mb-6">
         <ActiveShipments />
-        <StatusDistribution />
+        {/* <StatusDistribution /> */}
       </div>
 
       <PendingBids />

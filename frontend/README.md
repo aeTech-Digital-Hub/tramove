@@ -67,3 +67,23 @@ export default tseslint.config([
   },
 ])
 ```
+
+## map actions for shipper dashboard
+add map icon for easy user experience
+sorrt the shipment sort-1
+
+
+const shipments: PendingShipment[] = quotes.map((quote) => ({
+  id: quote.id,
+  quote,
+  weight: quote.weight,
+  route: `${quote.origin} to ${quote.destination}`,
+  status:
+    quote.status === "Pending"
+      ? "pending"
+      : quote.status === "In Transit"
+      ? "in_transit"
+      : quote.status === "Delivered"
+      ? "delivered"
+      : "cancelled",
+}));
